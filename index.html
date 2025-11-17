@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Your Name | Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio of Your Name - Developer | Designer | Builder" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="page">
+    <header class="nav">
+      <div class="nav-left">
+        <span class="logo-dot"></span>
+        <span class="logo-text">Your Name</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+        ⏺
+      </button>
+    </header>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="hero" id="top">
+        <div class="hero-left">
+          <p class="hero-eyebrow">Hi, I'm</p>
+          <h1>Your Name</h1>
+          <p class="hero-subtitle">
+            A <span class="accent">[Your Role]</span> who loves building clean, useful, and delightful digital experiences.
+          </p>
+          <div class="hero-actions">
+            <a href="#projects" class="btn primary">View Projects</a>
+            <a href="#contact" class="btn ghost">Contact Me</a>
+          </div>
+          <div class="hero-meta">
+            <span>📍 Based in [City, Country]</span>
+            <span>👨‍💻 Open to freelance / remote</span>
+          </div>
+        </div>
+        <div class="hero-right">
+          <div class="card hero-card">
+            <p class="card-title">Current Focus</p>
+            <p class="card-body">
+              • Learning: GIS / web mapping / cloud<br />
+              • Building: Side projects on GitHub<br />
+              • Goal: Ship something valuable every month
+            </p>
+            <a href="https://github.com/yourusername" class="card-link" target="_blank" rel="noopener">
+              View GitHub →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section class="section" id="about">
+        <div class="section-header">
+          <h2>About</h2>
+          <p>Quick snapshot of who I am and what I do.</p>
+        </div>
+        <div class="two-col">
+          <p>
+            I'm a developer with an interest in building real-world products, clean interfaces,
+            and tools that actually help people. I enjoy working across the stack — from data and APIs
+            to UI and user experience.
+          </p>
+          <p>
+            When I'm not coding, you'll probably find me reading about tech, experimenting with side
+            projects, or learning new tools. I'm always open to interesting collaborations and ideas.
+          </p>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section class="section" id="projects">
+        <div class="section-header">
+          <h2>Projects</h2>
+          <p>Some things I’ve built or contributed to.</p>
+        </div>
+
+        <div class="grid">
+          <!-- Project 1 -->
+          <article class="project-card">
+            <div class="project-top">
+              <h3>Project One</h3>
+              <span class="project-tag">Web App</span>
+            </div>
+            <p class="project-desc">
+              Short description of what this project does and why it’s cool. Mention tech stack and key feature.
+            </p>
+            <div class="project-meta">
+              <span>Tech: HTML, CSS, JS</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/yourusername/project-one" target="_blank" rel="noopener">Code</a>
+              <a href="https://yourusername.github.io/project-one" target="_blank" rel="noopener">Live Demo</a>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="project-card">
+            <div class="project-top">
+              <h3>Project Two</h3>
+              <span class="project-tag project-tag-alt">Data / GIS</span>
+            </div>
+            <p class="project-desc">
+              A short description of your GIS / data / mapping project or any analytics tool you’ve created.
+            </p>
+            <div class="project-meta">
+              <span>Tech: Python, Leaflet, GeoJSON</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/yourusername/project-two" target="_blank" rel="noopener">Code</a>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="project-card">
+            <div class="project-top">
+              <h3>Project Three</h3>
+              <span class="project-tag">Experiment</span>
+            </div>
+            <p class="project-desc">
+              Small experiment or side project that showcases your curiosity or learning.
+            </p>
+            <div class="project-meta">
+              <span>Tech: Whatever</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/yourusername" target="_blank" rel="noopener">More on GitHub</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Skills Section -->
+      <section class="section" id="skills">
+        <div class="section-header">
+          <h2>Skills</h2>
+          <p>Tools and technologies I work with.</p>
+        </div>
+
+        <div class="skills-wrap">
+          <div class="skills-group">
+            <h3>Languages</h3>
+            <div class="pill-row">
+              <span class="pill">JavaScript</span>
+              <span class="pill">Python</span>
+              <span class="pill">TypeScript</span>
+              <span class="pill">SQL</span>
+            </div>
+          </div>
+          <div class="skills-group">
+            <h3>Frontend</h3>
+            <div class="pill-row">
+              <span class="pill">HTML5</span>
+              <span class="pill">CSS3</span>
+              <span class="pill">React</span>
+              <span class="pill">Tailwind</span>
+            </div>
+          </div>
+          <div class="skills-group">
+            <h3>Backend & Tools</h3>
+            <div class="pill-row">
+              <span class="pill">Node.js</span>
+              <span class="pill">PostgreSQL</span>
+              <span class="pill">Git & GitHub</span>
+              <span class="pill">Docker</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section class="section" id="contact">
+        <div class="section-header">
+          <h2>Contact</h2>
+          <p>Want to collaborate, chat, or work together? Reach out.</p>
+        </div>
+        <div class="contact-card">
+          <p>Email me at:</p>
+          <a href="mailto:youremail@example.com" class="contact-email">
+            youremail@example.com
+          </a>
+          <div class="social-row">
+            <a href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="#top">Back to top ↑</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>© <span id="year"></span> Your Name.</span>
+      <span>Built with ❤️ using GitHub Pages.</span>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
