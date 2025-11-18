@@ -1,214 +1,279 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Shiv Yadav | Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Portfolio of Shiv Yadav - Developer | Designer | Builder" />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <title>Shiv Narayan Yadav | GIS & WebGIS Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+
+  <!-- Google Font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap">
+
+  <!-- Font Awesome (icons) -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <div class="page">
-    <header class="nav">
-      <div class="nav-left">
-        <span class="logo-dot"></span>
-        <span class="logo-text">Shiv Yadav</span>
+<body class="light-theme">
+  <!-- Animated GIS Map Background -->
+  <div id="map-bg"></div>
+  <div class="map-overlay"></div>
+
+  <!-- Scroll To Top Button -->
+  <button id="scrollTopBtn" title="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <header class="site-header">
+    <div class="brand">
+      <div class="brand-mark">SN</div>
+      <div>
+        <h1 class="brand-name">Shiv Narayan Yadav</h1>
+        <p class="brand-tagline">GIS & Remote Sensing | WebGIS | Geospatial Developer</p>
       </div>
-      <nav class="nav-links">
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
-        ⏺
-      </button>
-    </header>
+    </div>
 
-    <main>
-      <!-- Hero Section -->
-      <section class="hero" id="top">
-        <div class="hero-left">
-          <p class="hero-eyebrow">Hi, I'm</p>
-          <h1>Shiv Yadav</h1>
-          <p class="hero-subtitle">
-            A <span class="accent">[Your Role]</span> who loves building clean, useful, and delightful digital experiences.
-          </p>
-          <div class="hero-actions">
-            <a href="#projects" class="btn primary">View Projects</a>
-            <a href="#contact" class="btn ghost">Contact Me</a>
-          </div>
-          <div class="hero-meta">
-            <span>📍 Based in [City, Country]</span>
-            <span>👨‍💻 Open to freelance / remote</span>
-          </div>
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">WebGIS Gallery</a>
+      <a href="#github">GitHub</a>
+      <a href="#globe">3D Globe</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- Theme Toggle -->
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+      <i class="fas fa-moon"></i>
+    </button>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero" id="top">
+      <div class="hero-content">
+        <h2>Mapping Wild Landscapes & Digital Frontiers</h2>
+        <p>
+          GIS & Remote Sensing professional with <strong>5+ years</strong> of experience in
+          geospatial development, analysis, and WebGIS portals across the Himalaya and beyond.
+        </p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn primary">View WebGIS Gallery</a>
+          <a href="#github" class="btn ghost">Explore GitHub</a>
         </div>
-        <div class="hero-right">
-          <div class="card hero-card">
-            <p class="card-title">Current Focus</p>
-            <p class="card-body">
-              • Learning: GIS / web mapping / cloud<br />
-              • Building: Side projects on GitHub<br />
-              • Goal: Ship something valuable every month
-            </p>
-            <a href="https://github.com/yourusername" class="card-link" target="_blank" rel="noopener">
-              View GitHub →
+        <div class="hero-meta">
+          <span><i class="fas fa-location-dot"></i> Shillong, Meghalaya, India</span>
+          <span><i class="fab fa-github"></i> 
+            <a href="https://github.com/shivnarayanyadav1507-sys" target="_blank">
+              GitHub Profile
             </a>
-          </div>
+          </span>
+          <span><i class="fab fa-linkedin"></i> 
+            <a href="https://www.linkedin.com/in/shiv-narayan-yadav-1a40b349/" target="_blank">
+              LinkedIn
+            </a>
+          </span>
+          <span><i class="fas fa-envelope"></i> 
+            <a href="mailto:email2shivyadav@gmail.com">email2shivyadav@gmail.com</a>
+          </span>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- About Section -->
-      <section class="section" id="about">
-        <div class="section-header">
-          <h2>About</h2>
-          <p>Quick snapshot of who I am and what I do.</p>
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <h2 class="section-title">About</h2>
+      <p>
+        I am a GIS and Remote Sensing professional with a strong background in
+        <strong>GIS development</strong>, <strong>WebGIS</strong>, and <strong>geospatial analysis</strong>.
+        I work with field data, satellite imagery, and enterprise spatial databases to design
+        solutions for conservation, climate vulnerability, hydrology, and digital transformation.
+      </p>
+      <div class="pill-row">
+        <span class="pill">Python</span>
+        <span class="pill">Leaflet</span>
+        <span class="pill">ArcGIS Pro</span>
+        <span class="pill">Google Earth Engine</span>
+        <span class="pill">PostgreSQL / PostGIS</span>
+        <span class="pill">GeoServer</span>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section section-grid">
+      <div>
+        <h2 class="section-title">Core Skills</h2>
+        <ul class="bullet-list">
+          <li>GIS Development: Python, JavaScript, HTML, CSS, ArcGIS API 3.x & 4.x, Leaflet</li>
+          <li>WebGIS: GeoServer, PostGIS, ArcGIS Server, ArcGIS Online</li>
+          <li>RS & Image Processing: LULC classification, DEM/contour, feature extraction</li>
+          <li>Data Processing & Migration: schema design, domains, subtypes, ETL workflows</li>
+          <li>Hydrological & climate applications in geospatial environments</li>
+          <li>Training, workshops, documentation & reporting</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="section-subtitle">Tech Stack</h3>
+        <div class="chips">
+          <span>ArcGIS Desktop 10.8</span>
+          <span>ArcGIS Pro</span>
+          <span>QGIS</span>
+          <span>Erdas Imagine</span>
+          <span>Google Earth Engine</span>
+          <span>Global Mapper</span>
+          <span>PostgreSQL</span>
+          <span>PostGIS</span>
+          <span>GeoServer</span>
+          <span>Python</span>
+          <span>JavaScript</span>
+          <span>HTML/CSS</span>
         </div>
-        <div class="two-col">
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="section">
+      <h2 class="section-title">Experience Highlights</h2>
+      <div class="timeline">
+        <article class="timeline-item">
+          <h3>GIS Analyst – EarthTree Enviro Pvt. Ltd.</h3>
+          <p class="meta">June 2024 – Present</p>
           <p>
-            I'm a developer with an interest in building real-world products, clean interfaces,
-            and tools that actually help people. I enjoy working across the stack — from data and APIs
-            to UI and user experience.
+            Leading geospatial analysis, WebGIS components and data workflows for
+            environmental and carbon projects.
           </p>
+        </article>
+
+        <article class="timeline-item">
+          <h3>Project Associate – II (GIS), Wildlife Institute of India</h3>
+          <p class="meta">Jul 2023 – Dec 2023 | Tirthan & Sainj WLS</p>
           <p>
-            When I'm not coding, you'll probably find me reading about tech, experimenting with side
-            projects, or learning new tools. I'm always open to interesting collaborations and ideas.
+            Livestock grazing assessment using LULC classification, species distribution modelling,
+            and survey-based geospatial analysis. Developed Python tools and map products for stakeholders.
           </p>
-        </div>
-      </section>
+        </article>
 
-      <!-- Projects Section -->
-      <section class="section" id="projects">
-        <div class="section-header">
-          <h2>Projects</h2>
-          <p>Some things I’ve built or contributed to.</p>
-        </div>
+        <article class="timeline-item">
+          <h3>Project Associate – I (GIS), Wildlife Institute of India</h3>
+          <p class="meta">Apr 2021 – Jun 2023 | Uttarakhand Wildlife Estimation</p>
+          <p>
+            Designed survey layouts, processed field data, built LULC and SDM layers for the
+            Himalayan zone wildlife population estimation.
+          </p>
+        </article>
 
-        <div class="grid">
-          <!-- Project 1 -->
-          <article class="project-card">
-            <div class="project-top">
-              <h3>Project One</h3>
-              <span class="project-tag">Web App</span>
-            </div>
-            <p class="project-desc">
-              Short description of what this project does and why it’s cool. Mention tech stack and key feature.
-            </p>
-            <div class="project-meta">
-              <span>Tech: HTML, CSS, JS</span>
-            </div>
-            <div class="project-links">
-              <a href="https://github.com/yourusername/project-one" target="_blank" rel="noopener">Code</a>
-              <a href="https://yourusername.github.io/project-one" target="_blank" rel="noopener">Live Demo</a>
-            </div>
-          </article>
+        <article class="timeline-item">
+          <h3>External WebGIS Developer – IPE Global</h3>
+          <p class="meta">Dec 2018 – Jan 2019 | Climate Vulnerability Portal</p>
+          <p>
+            Designed & developed a WebGIS portal (WordPress, HTML, JavaScript, Leaflet) for
+            climate vulnerability and risk assessment across 12 Himalayan states.
+          </p>
+        </article>
+      </div>
+    </section>
 
-          <!-- Project 2 -->
-          <article class="project-card">
-            <div class="project-top">
-              <h3>Project Two</h3>
-              <span class="project-tag project-tag-alt">Data / GIS</span>
-            </div>
-            <p class="project-desc">
-              A short description of your GIS / data / mapping project or any analytics tool you’ve created.
-            </p>
-            <div class="project-meta">
-              <span>Tech: Python, Leaflet, GeoJSON</span>
-            </div>
-            <div class="project-links">
-              <a href="https://github.com/yourusername/project-two" target="_blank" rel="noopener">Code</a>
-            </div>
-          </article>
+    <!-- WEBGIS GALLERY -->
+    <section id="projects" class="section">
+      <h2 class="section-title">WebGIS & Geospatial Projects</h2>
+      <p class="section-intro">
+        A selection of WebGIS, hydrology, and network analysis projects built using
+        Leaflet, ArcGIS APIs, PostGIS, and GeoServer.
+      </p>
+      <div class="card-grid">
+        <article class="card">
+          <h3>Climate Vulnerability WebGIS – 12 Himalayan States</h3>
+          <p>
+            Web-based portal for climate vulnerability & risk assessment using Leaflet,
+            PostGIS, and GeoServer. Includes interactive tools for area & length measurement,
+            layer toggles, and state-wise vulnerability views.
+          </p>
+          <a href="#" class="card-link">View demo (add URL)</a>
+        </article>
+        <article class="card">
+          <h3>Hydrological Regime & Climate Change Web Portal</h3>
+          <p>
+            Geospatial hydrology application visualizing SWAT-simulated water balance
+            components under climate change scenarios with custom Leaflet tools.
+          </p>
+          <a href="#" class="card-link">View demo (add URL)</a>
+        </article>
+        <article class="card">
+          <h3>3D Network Analysis – Mussoorie Road Network</h3>
+          <p>
+            3D network database for optimal routing and emergency access in hilly terrain,
+            integrating DEM, contours, and road layers in a GIS environment.
+          </p>
+          <a href="#" class="card-link">View demo (add URL)</a>
+        </article>
+      </div>
+    </section>
 
-          <!-- Project 3 -->
-          <article class="project-card">
-            <div class="project-top">
-              <h3>Project Three</h3>
-              <span class="project-tag">Experiment</span>
-            </div>
-            <p class="project-desc">
-              Small experiment or side project that showcases your curiosity or learning.
-            </p>
-            <div class="project-meta">
-              <span>Tech: Whatever</span>
-            </div>
-            <div class="project-links">
-              <a href="https://github.com/yourusername" target="_blank" rel="noopener">More on GitHub</a>
-            </div>
-          </article>
-        </div>
-      </section>
+    <!-- GITHUB REPOSITORIES -->
+    <section id="github" class="section">
+      <h2 class="section-title">Latest GitHub Repositories</h2>
+      <p class="section-intro">
+        Auto-fetched repositories from GitHub – ideal for your Python tools, WebGIS apps,
+        and automation scripts.
+      </p>
+      <div id="repo-list" class="card-grid repos">
+        <div class="loading">Loading repositories…</div>
+      </div>
+    </section>
 
-      <!-- Skills Section -->
-      <section class="section" id="skills">
-        <div class="section-header">
-          <h2>Skills</h2>
-          <p>Tools and technologies I work with.</p>
-        </div>
+    <!-- 3D GLOBE -->
+    <section id="globe" class="section section-globe">
+      <div class="globe-info">
+        <h2 class="section-title">Interactive 3D Globe</h2>
+        <p>
+          A lightweight Three.js globe to showcase your global work. You can later
+          customize this to highlight project locations, camera-trap grids, or hydrological basins.
+        </p>
+        <ul class="bullet-list">
+          <li>Rotating Earth with basic lighting</li>
+          <li>Optimized for modern browsers</li>
+          <li>Easy to extend with markers & arcs</li>
+        </ul>
+      </div>
+      <div class="globe-canvas-wrap">
+        <canvas id="globe-canvas"></canvas>
+      </div>
+    </section>
 
-        <div class="skills-wrap">
-          <div class="skills-group">
-            <h3>Languages</h3>
-            <div class="pill-row">
-              <span class="pill">JavaScript</span>
-              <span class="pill">Python</span>
-              <span class="pill">TypeScript</span>
-              <span class="pill">SQL</span>
-            </div>
-          </div>
-          <div class="skills-group">
-            <h3>Frontend</h3>
-            <div class="pill-row">
-              <span class="pill">HTML5</span>
-              <span class="pill">CSS3</span>
-              <span class="pill">React</span>
-              <span class="pill">Tailwind</span>
-            </div>
-          </div>
-          <div class="skills-group">
-            <h3>Backend & Tools</h3>
-            <div class="pill-row">
-              <span class="pill">Node.js</span>
-              <span class="pill">PostgreSQL</span>
-              <span class="pill">Git & GitHub</span>
-              <span class="pill">Docker</span>
-            </div>
-          </div>
-        </div>
-      </section>
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <h2 class="section-title">Contact</h2>
+      <p>If you’d like to collaborate on GIS, WebGIS, or conservation projects, reach out:</p>
+      <ul class="contact-list">
+        <li><i class="fas fa-envelope"></i> <a href="mailto:email2shivyadav@gmail.com">email2shivyadav@gmail.com</a></li>
+        <li><i class="fas fa-phone"></i> +91-8090434437</li>
+        <li><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/shiv-narayan-yadav-1a40b349/" target="_blank">LinkedIn Profile</a></li>
+        <li><i class="fab fa-github"></i> <a href="https://github.com/shivnarayanyadav1507-sys" target="_blank">GitHub Profile</a></li>
+      </ul>
+    </section>
+  </main>
 
-      <!-- Contact Section -->
-      <section class="section" id="contact">
-        <div class="section-header">
-          <h2>Contact</h2>
-          <p>Want to collaborate, chat, or work together? Reach out.</p>
-        </div>
-        <div class="contact-card">
-          <p>Email me at:</p>
-          <a href="mailto:youremail@example.com" class="contact-email">
-            youremail@example.com
-          </a>
-          <div class="social-row">
-            <a href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
-            <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener">LinkedIn</a>
-            <a href="#top">Back to top ↑</a>
-          </div>
-        </div>
-      </section>
-    </main>
+  <footer class="site-footer">
+    <span>© <span id="year"></span> Shiv Narayan Yadav · Built with ♥ using GIS & Web</span>
+  </footer>
 
-    <footer class="footer">
-      <span>© <span id="year"></span> Shiv Yadav.</span>
-      <span>Built with ❤️ using GitHub Pages.</span>
-    </footer>
-  </div>
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
+  <!-- Three.js -->
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+
+  <!-- Custom JS -->
   <script src="script.js"></script>
 </body>
 </html>
-
-
-
