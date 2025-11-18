@@ -18,18 +18,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateThemeIcon();
 
-  themeToggle.addEventListener("click", () => {
-    body.classList.toggle("dark-theme");
-    body.classList.toggle("light-theme");
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      body.classList.toggle("dark-theme");
+      body.classList.toggle("light-theme");
 
-    const current =
-      body.classList.contains("dark-theme") ? "dark" : "light";
-    localStorage.setItem("theme", current);
-    updateThemeIcon();
-  });
+      const current =
+        body.classList.contains("dark-theme") ? "dark" : "light";
+      localStorage.setItem("theme", current);
+      updateThemeIcon();
+    });
+  }
 
   function updateThemeIcon() {
+    if (!themeToggle) return;
     const icon = themeToggle.querySelector("i");
+    if (!icon) return;
     if (body.classList.contains("dark-theme")) {
       icon.classList.remove("fa-moon");
       icon.classList.add("fa-sun");
@@ -170,19 +174,25 @@ function initGlobe() {
     antialias: true,
     alpha: true,
   });
+  renderer.setPixelRatio(window.devicePixelRatio || 1);
+  renderer.setClearColor(0x000000, 0); // transparent so your gradient shows
 
   const globeContainer = canvas.parentElement;
-  const camera = new THREE.PerspectiveCamera(
-    45,
-    1,
-    0.1,
-    1000
-  );
+
+  const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
   camera.position.set(0, 0, 3.2);
 
   function resizeRenderer() {
-    const { width, height } = globeContainer.getBoundingClientRect();
-    renderer.setSize(width, height);
+    const rect = globeContainer.getBoundingClientRect();
+    let width = rect.width;
+    let height = rect.height;
+
+    if (!width || !height) {
+      width = 400;
+      height = 260; // fallback
+    }
+
+    renderer.setSize(width, height, false);
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
   }
@@ -195,36 +205,42 @@ function initGlobe() {
   dirLight.position.set(3, 3, 5);
   scene.add(dirLight);
 
-  // Globe geometry
+  // Globe geometry + basic material (always visible)
   const geometry = new THREE.SphereGeometry(1, 64, 64);
-  const loader = new THREE.TextureLoader();
+  const material = new THREE.MeshPhongMaterial({
+    color: 0x1f2937, // fallback dark blue/grey Earth
+    shininess: 15,
+  });
+  const globe = new THREE.Mesh(geometry, material);
+  scene.add(globe);
 
+  // Try to load an Earth texture (with CORS-friendly URL)
+  const loader = new THREE.TextureLoader();
+  loader.setCrossOrigin("anonymous");
   const textureUrl =
-    "https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg";
+    "https://threejs.org/examples/textures/land_ocean_ice_cloud_2048.jpg";
 
   loader.load(
     textureUrl,
     (texture) => {
-      const material = new THREE.MeshPhongMaterial({
-        map: texture,
-      });
-      const globe = new THREE.Mesh(geometry, material);
-      scene.add(globe);
-
-      function animate() {
-        requestAnimationFrame(animate);
-        globe.rotation.y += 0.0018;
-        renderer.render(scene, camera);
-      }
-      animate();
+      material.map = texture;
+      material.needsUpdate = true;
     },
     undefined,
     (err) => {
-      console.error("Failed to load globe texture", err);
+      console.error("Failed to load globe texture, using solid color instead.", err);
     }
   );
 
-  // Handle resize
+  // Animation loop
+  function animate() {
+    requestAnimationFrame(animate);
+    globe.rotation.y += 0.002;
+    renderer.render(scene, camera);
+  }
+
+  // Resize & start
   window.addEventListener("resize", resizeRenderer);
   resizeRenderer();
+  animate();
 }
