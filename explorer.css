@@ -1,0 +1,48 @@
+:root{--paper:#e9eadf;--cream:#f3f1e6;--ink:#24362a;--muted:#62705c;--line:#c6cdba;--lime:#c7d4ae;--dark:#263c2e;--display:'DM Sans',Arial,sans-serif}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.earth-navigation{position:absolute;top:0;left:0;width:100%;height:90px;padding:0 5%;background:transparent;backdrop-filter:none;color:var(--ink);border:0;z-index:50}
+.earth-navigation .brand{font-family:var(--body);font-size:37px;letter-spacing:-2px;font-weight:500;line-height:1}
+.earth-navigation .brand-dot{color:#778b54;font-size:44px;vertical-align:baseline}
+.earth-navigation nav{gap:29px;font-size:13px;font-weight:400}
+.earth-navigation nav a:after{background:#637b48}
+.earth-navigation .nav-contact{border-color:#526a3d60;border-radius:50px;padding:10px 19px;font-weight:400}
+.earth-navigation .nav-contact:hover{background:#d4ddc6;color:var(--dark)}
+.explorer-hero{height:100svh;min-height:600px;max-height:none;width:100%;position:relative;isolation:isolate;overflow:hidden;background:#e1e3d5;color:var(--ink);display:flex;align-items:center;padding:110px 5% 70px}
+.earth-copy{position:relative;z-index:3;width:51%;max-width:900px}
+.earth-eyebrow{font-size:11px;letter-spacing:.14em;font-weight:500;color:#586c48;margin:0 0 28px}
+.earth-copy h1{font-family:var(--display);font-size:clamp(56px,6.5vw,126px);font-weight:400;line-height:1.03;letter-spacing:-.065em;margin:0 0 30px}
+.earth-copy h1 em{font-family:Georgia,'Times New Roman',serif;font-weight:400;color:#71865b;letter-spacing:-.05em}
+.earth-description{font-size:clamp(15px,1.15vw,19px);line-height:1.7;color:#5c6d53;max-width:410px;margin:0 0 30px}
+.earth-actions{display:flex;align-items:center;gap:12px}
+.earth-primary,.earth-secondary{display:inline-flex;align-items:center;justify-content:space-between;gap:32px;border:1px solid #71836560;border-radius:50px;padding:14px 23px;font-size:13px;line-height:1.5;transition:background .2s,color .2s}
+.earth-primary{background:#2d4534;color:#f4f3e5;border-color:#2d4534}.earth-primary:hover{background:#425c40}
+.earth-secondary{color:#30452f}.earth-secondary:hover{background:#dce2cf}
+.earth-primary>span,.earth-secondary>span{font-size:20px;line-height:1}
+/* Match the source aspect ratio. Its sides and top dissolve into the hero;
+   the lower edge extends to the viewport, rather than ending in an inset card. */
+.explorer-stage{position:absolute;right:1%;bottom:-2px;height:94%;width:auto;aspect-ratio:8/9;max-width:62%;touch-action:pan-y;outline-offset:-8px;z-index:1;
+ mask-image:linear-gradient(to right,transparent,black 18%,black 80%,transparent),linear-gradient(to bottom,transparent,black 2%,black);
+ mask-composite:intersect;
+ -webkit-mask-image:linear-gradient(to right,transparent,black 18%,black 80%,transparent),linear-gradient(to bottom,transparent,black 2%,black);
+ -webkit-mask-composite:source-in;
+}
+.explorer-stage img,.explorer-stage canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;display:block;user-select:none;pointer-events:none}
+.explorer-stage canvas{opacity:0}.explorer-stage.is-ready canvas{opacity:1}
+.motion-toggle{position:absolute;right:25px;bottom:22px;z-index:5;background:#e1e3d5;border:1px solid #71836560;border-radius:30px;padding:8px 14px;font-size:11px;color:#405739;opacity:0;pointer-events:none}
+.motion-toggle:focus-visible,.motion-toggle.is-paused{opacity:1;pointer-events:auto}.motion-toggle[hidden]{display:none}
+.button{border-radius:30px}.primary:hover{background:#bdcca0}.contact h2{letter-spacing:-.07em}.project{border-radius:4px}
+.mobile-nav{background:#e1e3d5;color:#263c2e;border-color:#9eae8e50}
+@media(min-width:1800px){.explorer-stage{right:3%;height:96%}.earth-copy{margin-left:2%}}
+@media(max-width:1000px){.earth-copy h1{font-size:7vw}.earth-description{max-width:330px}.explorer-stage{right:-8%;height:89%}.earth-navigation nav{gap:20px}}
+@media(max-width:700px){
+ .earth-navigation{height:72px;padding:0 6%}.earth-navigation .brand{font-size:31px}.earth-navigation .brand-dot{font-size:35px}.earth-navigation nav,.earth-navigation .nav-contact{display:none}.earth-navigation .menu-toggle{display:flex;color:var(--ink);font-size:12px}.mobile-nav{top:72px;padding:25px 6%;gap:22px}
+ .explorer-hero{height:100svh;min-height:620px;padding:0 7% 34px;align-items:flex-end}
+ .earth-copy{width:100%;max-width:450px}.earth-eyebrow{font-size:9px;margin-bottom:14px;letter-spacing:.1em}.earth-copy h1{font-size:clamp(44px,11vw,68px);margin-bottom:16px;line-height:1.02}.earth-description{font-size:13px;line-height:1.6;max-width:330px;margin-bottom:20px}
+ .earth-actions{gap:10px}.earth-primary,.earth-secondary{font-size:12px;padding:12px 20px;gap:24px}
+ .explorer-stage{height:60%;max-width:none;right:-5%;bottom:auto;top:50px;mask-image:linear-gradient(to right,transparent,black 15%,black 82%,transparent),linear-gradient(to bottom,transparent,black 8%,black 63%,transparent 94%);-webkit-mask-image:linear-gradient(to right,transparent,black 15%,black 82%,transparent),linear-gradient(to bottom,transparent,black 8%,black 63%,transparent 94%)}
+ .motion-toggle{top:79px;bottom:auto;right:18px}
+}
+@media(max-height:750px) and (min-width:701px){.explorer-hero{min-height:540px;padding-top:95px;padding-bottom:35px}.earth-copy h1{font-size:clamp(52px,6vw,88px)}.earth-eyebrow{margin-bottom:18px}.earth-description{margin-bottom:22px}.explorer-stage{height:96%}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+@media(max-width:700px) and (max-height:740px){.explorer-hero{padding-bottom:26px}.explorer-stage{height:52%}.earth-copy h1{font-size:42px;margin-bottom:12px}.earth-eyebrow{margin-bottom:10px}.earth-description{font-size:12px;margin-bottom:16px}.earth-primary,.earth-secondary{padding:11px 18px}}

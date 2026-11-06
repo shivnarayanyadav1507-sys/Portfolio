@@ -1,279 +1,42 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Shiv Narayan Yadav | GIS & WebGIS Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Leaflet CSS -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  />
-
-  <!-- Google Font -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap">
-
-  <!-- Font Awesome (icons) -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-  />
-
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body class="light-theme">
-  <!-- Animated GIS Map Background -->
-  <div id="map-bg"></div>
-  <div class="map-overlay"></div>
-
-  <!-- Scroll To Top Button -->
-  <button id="scrollTopBtn" title="Back to top">
-    <i class="fas fa-arrow-up"></i>
-  </button>
-
-  <header class="site-header">
-    <div class="brand">
-      <div class="brand-mark">SN</div>
-      <div>
-        <h1 class="brand-name">Shiv Narayan Yadav</h1>
-        <p class="brand-tagline">GIS & Remote Sensing | WebGIS | Geospatial Developer</p>
-      </div>
-    </div>
-
-    <nav class="nav-links">
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">WebGIS Gallery</a>
-      <a href="#github">GitHub</a>
-      <a href="#globe">3D Globe</a>
-      <a href="#contact">Contact</a>
-    </nav>
-
-    <!-- Theme Toggle -->
-    <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
-      <i class="fas fa-moon"></i>
-    </button>
-  </header>
-
-  <main>
-    <!-- HERO SECTION -->
-    <section class="hero" id="top">
-      <div class="hero-content">
-        <h2>Mapping Wild Landscapes & Digital Frontiers</h2>
-        <p>
-          GIS & Remote Sensing professional with <strong>5+ years</strong> of experience in
-          geospatial development, analysis, and WebGIS portals across the Himalaya and beyond.
-        </p>
-        <div class="hero-actions">
-          <a href="#projects" class="btn primary">View WebGIS Gallery</a>
-          <a href="#github" class="btn ghost">Explore GitHub</a>
-        </div>
-        <div class="hero-meta">
-          <span><i class="fas fa-location-dot"></i> Shillong, Meghalaya, India</span>
-          <span><i class="fab fa-github"></i> 
-            <a href="https://github.com/shivnarayanyadav1507-sys" target="_blank">
-              GitHub Profile
-            </a>
-          </span>
-          <span><i class="fab fa-linkedin"></i> 
-            <a href="https://www.linkedin.com/in/shiv-narayan-yadav-1a40b349/" target="_blank">
-              LinkedIn
-            </a>
-          </span>
-          <span><i class="fas fa-envelope"></i> 
-            <a href="mailto:email2shivyadav@gmail.com">email2shivyadav@gmail.com</a>
-          </span>
-        </div>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="about" class="section">
-      <h2 class="section-title">About</h2>
-      <p>
-        I am a GIS and Remote Sensing professional with a strong background in
-        <strong>GIS development</strong>, <strong>WebGIS</strong>, and <strong>geospatial analysis</strong>.
-        I work with field data, satellite imagery, and enterprise spatial databases to design
-        solutions for conservation, climate vulnerability, hydrology, and digital transformation.
-      </p>
-      <div class="pill-row">
-        <span class="pill">Python</span>
-        <span class="pill">Leaflet</span>
-        <span class="pill">ArcGIS Pro</span>
-        <span class="pill">Google Earth Engine</span>
-        <span class="pill">PostgreSQL / PostGIS</span>
-        <span class="pill">GeoServer</span>
-      </div>
-    </section>
-
-    <!-- SKILLS -->
-    <section id="skills" class="section section-grid">
-      <div>
-        <h2 class="section-title">Core Skills</h2>
-        <ul class="bullet-list">
-          <li>GIS Development: Python, JavaScript, HTML, CSS, ArcGIS API 3.x & 4.x, Leaflet</li>
-          <li>WebGIS: GeoServer, PostGIS, ArcGIS Server, ArcGIS Online</li>
-          <li>RS & Image Processing: LULC classification, DEM/contour, feature extraction</li>
-          <li>Data Processing & Migration: schema design, domains, subtypes, ETL workflows</li>
-          <li>Hydrological & climate applications in geospatial environments</li>
-          <li>Training, workshops, documentation & reporting</li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="section-subtitle">Tech Stack</h3>
-        <div class="chips">
-          <span>ArcGIS Desktop 10.8</span>
-          <span>ArcGIS Pro</span>
-          <span>QGIS</span>
-          <span>Erdas Imagine</span>
-          <span>Google Earth Engine</span>
-          <span>Global Mapper</span>
-          <span>PostgreSQL</span>
-          <span>PostGIS</span>
-          <span>GeoServer</span>
-          <span>Python</span>
-          <span>JavaScript</span>
-          <span>HTML/CSS</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- EXPERIENCE -->
-    <section id="experience" class="section">
-      <h2 class="section-title">Experience Highlights</h2>
-      <div class="timeline">
-        <article class="timeline-item">
-          <h3>GIS Analyst – EarthTree Enviro Pvt. Ltd.</h3>
-          <p class="meta">June 2024 – Present</p>
-          <p>
-            Leading geospatial analysis, WebGIS components and data workflows for
-            environmental and carbon projects.
-          </p>
-        </article>
-
-        <article class="timeline-item">
-          <h3>Project Associate – II (GIS), Wildlife Institute of India</h3>
-          <p class="meta">Jul 2023 – Dec 2023 | Tirthan & Sainj WLS</p>
-          <p>
-            Livestock grazing assessment using LULC classification, species distribution modelling,
-            and survey-based geospatial analysis. Developed Python tools and map products for stakeholders.
-          </p>
-        </article>
-
-        <article class="timeline-item">
-          <h3>Project Associate – I (GIS), Wildlife Institute of India</h3>
-          <p class="meta">Apr 2021 – Jun 2023 | Uttarakhand Wildlife Estimation</p>
-          <p>
-            Designed survey layouts, processed field data, built LULC and SDM layers for the
-            Himalayan zone wildlife population estimation.
-          </p>
-        </article>
-
-        <article class="timeline-item">
-          <h3>External WebGIS Developer – IPE Global</h3>
-          <p class="meta">Dec 2018 – Jan 2019 | Climate Vulnerability Portal</p>
-          <p>
-            Designed & developed a WebGIS portal (WordPress, HTML, JavaScript, Leaflet) for
-            climate vulnerability and risk assessment across 12 Himalayan states.
-          </p>
-        </article>
-      </div>
-    </section>
-
-    <!-- WEBGIS GALLERY -->
-    <section id="projects" class="section">
-      <h2 class="section-title">WebGIS & Geospatial Projects</h2>
-      <p class="section-intro">
-        A selection of WebGIS, hydrology, and network analysis projects built using
-        Leaflet, ArcGIS APIs, PostGIS, and GeoServer.
-      </p>
-      <div class="card-grid">
-        <article class="card">
-          <h3>Climate Vulnerability WebGIS – 12 Himalayan States</h3>
-          <p>
-            Web-based portal for climate vulnerability & risk assessment using Leaflet,
-            PostGIS, and GeoServer. Includes interactive tools for area & length measurement,
-            layer toggles, and state-wise vulnerability views.
-          </p>
-          <a href="#" class="card-link">View demo (add URL)</a>
-        </article>
-        <article class="card">
-          <h3>Hydrological Regime & Climate Change Web Portal</h3>
-          <p>
-            Geospatial hydrology application visualizing SWAT-simulated water balance
-            components under climate change scenarios with custom Leaflet tools.
-          </p>
-          <a href="#" class="card-link">View demo (add URL)</a>
-        </article>
-        <article class="card">
-          <h3>3D Network Analysis – Mussoorie Road Network</h3>
-          <p>
-            3D network database for optimal routing and emergency access in hilly terrain,
-            integrating DEM, contours, and road layers in a GIS environment.
-          </p>
-          <a href="#" class="card-link">View demo (add URL)</a>
-        </article>
-      </div>
-    </section>
-
-    <!-- GITHUB REPOSITORIES -->
-    <section id="github" class="section">
-      <h2 class="section-title">Latest GitHub Repositories</h2>
-      <p class="section-intro">
-        Auto-fetched repositories from GitHub – ideal for your Python tools, WebGIS apps,
-        and automation scripts.
-      </p>
-      <div id="repo-list" class="card-grid repos">
-        <div class="loading">Loading repositories…</div>
-      </div>
-    </section>
-
-    <!-- 3D GLOBE -->
-    <section id="globe" class="section section-globe">
-      <div class="globe-info">
-        <h2 class="section-title">Interactive 3D Globe</h2>
-        <p>
-          A lightweight Three.js globe to showcase your global work. You can later
-          customize this to highlight project locations, camera-trap grids, or hydrological basins.
-        </p>
-        <ul class="bullet-list">
-          <li>Rotating Earth with basic lighting</li>
-          <li>Optimized for modern browsers</li>
-          <li>Easy to extend with markers & arcs</li>
-        </ul>
-      </div>
-      <div class="globe-canvas-wrap">
-        <canvas id="globe-canvas"></canvas>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="section">
-      <h2 class="section-title">Contact</h2>
-      <p>If you’d like to collaborate on GIS, WebGIS, or conservation projects, reach out:</p>
-      <ul class="contact-list">
-        <li><i class="fas fa-envelope"></i> <a href="mailto:email2shivyadav@gmail.com">email2shivyadav@gmail.com</a></li>
-        <li><i class="fas fa-phone"></i> +91-8090434437</li>
-        <li><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/shiv-narayan-yadav-1a40b349/" target="_blank">LinkedIn Profile</a></li>
-        <li><i class="fab fa-github"></i> <a href="https://github.com/shivnarayanyadav1507-sys" target="_blank">GitHub Profile</a></li>
-      </ul>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <span>© <span id="year"></span> Shiv Narayan Yadav · Built with ♥ using GIS & Web</span>
-  </footer>
-
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-  <!-- Three.js -->
-  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
-
-  <!-- Custom JS -->
-  <script src="script.js"></script>
-</body>
-</html>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#e9eadf"><meta name="description" content="Shiv Narayan Yadav — GIS and remote sensing specialist working across conservation, forest restoration, carbon monitoring and environmental research."><title>Shiv Narayan Yadav — Geospatial Specialist</title><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="explorer.css?v=6"><script src="app.js?v=6" defer></script><script type="module" src="explorer.js?v=6"></script><link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600&display=swap" rel="stylesheet"><link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap" rel="stylesheet"><script src="theme-init.js"></script><link rel="stylesheet" href="portfolio.css"><script src="vendor/d3-array.min.js" defer></script><script src="vendor/d3-geo.min.js" defer></script><script src="globe.js" defer></script><script src="theme.js" defer></script></head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="navigation earth-navigation"><a class="brand" href="#home" aria-label="Shiv Narayan Yadav home">shiv<span class="brand-dot">.</span></a><nav aria-label="Main navigation"><a href="#work">Work</a><a href="#about">About</a><a href="#experience">Experience</a><a href="#expertise">Expertise</a><a href="#research">Research</a></nav><button class="theme-toggle" type="button" aria-label="Switch to dark theme">◐ <span>Dark</span></button><a class="nav-contact" href="#contact">Contact <span aria-hidden="true">↗</span></a><button class="menu-toggle" aria-expanded="false" aria-controls="mobile-nav">Menu <span>+</span></button></header>
+<nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation" hidden><a href="#about">About</a><a href="#work">Selected work</a><a href="#experience">Experience</a><a href="#expertise">Expertise</a><a href="#research">Research</a><a href="#contact">Contact</a></nav>
+<main id="main">
+<section class="explorer-hero" id="home" aria-labelledby="hero-title">
+  <div class="earth-copy">
+    <p class="earth-eyebrow">GIS &amp; REMOTE SENSING</p>
+    <h1 id="hero-title">Shiv Narayan<br><em>Yadav</em></h1>
+    <p class="earth-description">GIS and remote sensing for conservation, forest restoration and land-use planning.</p>
+    <div class="earth-actions"><a class="earth-primary" href="#work">View work <span aria-hidden="true">↗</span></a><a class="earth-secondary" href="profile.html" target="_blank" rel="noopener">View CV <span aria-hidden="true">↗</span></a></div>
+  </div>
+  <div id="explorer-stage" class="explorer-stage" role="img" tabindex="0" aria-label="Geospatial explorer. Move the cursor or use left and right arrow keys to turn his head.">
+    <img class="explorer-poster" src="assets/explorer-poster.jpg" alt="" width="640" height="720" fetchpriority="high">
+    <canvas id="explorer-canvas" width="640" height="720" aria-hidden="true"></canvas>
+  </div>
+  <button id="earth-motion" class="motion-toggle" type="button" aria-pressed="false" hidden>Enable motion</button>
+</section>
+<section class="about section" id="about"><div class="section-top"><span class="eyebrow">01 / ABOUT</span><span class="section-counter">ABOUT ME</span></div><div class="about-intro"><h2>About my work.</h2><div><p class="lead">I’m Shiv, a GIS and remote sensing specialist working where environmental questions meet geospatial technology.</p><p>My work spans Himalayan conservation landscapes, forest restoration in Meghalaya, and ecosystem services in Assam. I build spatial datasets, develop repeatable workflows, and translate complex analysis into maps and information that teams can use.</p><a class="text-link" href="profile.html" target="_blank" rel="noopener">View professional profile <span aria-hidden="true">↗</span></a></div></div>
+</section>
+<section class="work section" id="work"><div class="section-top"><span class="eyebrow">02 / SELECTED WORK</span><span class="section-counter">PROJECTS</span></div><div class="work-heading"><h2>Selected projects.</h2><p>Projects in conservation, forest restoration, ecosystem services and hydrology.</p></div>
+<div class="project-list">
+<button class="project project-meghalaya" data-project="meghalaya" aria-haspopup="dialog"><span class="project-index">01 / RESTORATION & CARBON</span><span class="project-name">Regeneration<br>Meghalaya.</span><span class="project-tags"><span>Eligibility analysis</span><span>MRV</span><span>Python & GEE</span></span><canvas class="project-terrain" data-terrain="forest" aria-hidden="true"></canvas><span class="project-art-note">ILLUSTRATIVE TERRAIN</span><span class="project-foot"><span>EARTHTREE DATA SERVICES</span><span>Explore project <b aria-hidden="true">↗</b></span></span></button>
+<button class="project project-himalaya" data-project="himalaya" aria-haspopup="dialog"><span class="project-index">02 / BIODIVERSITY & CONSERVATION</span><span class="project-name">SECURE<br>Himalaya.</span><span class="project-tags"><span>High conservation values</span><span>GIS analysis</span></span><canvas class="project-terrain" data-terrain="snow" aria-hidden="true"></canvas><span class="project-art-note">ILLUSTRATIVE TERRAIN</span><span class="project-foot"><span>WII · SECURE HIMALAYA</span><span>Explore project <b aria-hidden="true">↗</b></span></span></button>
+<button class="project project-assam" data-project="assam" aria-haspopup="dialog"><span class="project-index">03 / ECOSYSTEM SERVICES</span><span class="project-name">TEEB AgriFood<br>Assam.</span><span class="project-tags"><span>TEEB AgriFood</span><span>Environmental modelling</span></span><canvas class="project-terrain" data-terrain="agriculture" aria-hidden="true"></canvas><span class="project-art-note">ILLUSTRATIVE TERRAIN</span><span class="project-foot"><span>IIFM · ASSAM</span><span>Explore project <b aria-hidden="true">↗</b></span></span></button>
+<button class="project project-water" data-project="water" aria-haspopup="dialog"><span class="project-index">04 / HYDROLOGY · ACADEMIC PROJECT</span><span class="project-name">River basin<br>hydrology.</span><span class="project-tags"><span>SWAT</span><span>Leaflet</span><span>JavaScript</span></span><div class="water-art" aria-hidden="true"><div></div><div></div><div></div></div><span class="project-art-note">FLOW STUDY / CONCEPT ART</span><span class="project-foot"><span>IIRS · DISSERTATION</span><span>Explore project <b aria-hidden="true">↗</b></span></span></button>
+</div></section>
+<section class="experience section" id="experience" aria-labelledby="experience-title"><div class="section-top"><span class="eyebrow">03 / EXPERIENCE</span><span class="section-counter">2018 — PRESENT</span></div><div class="experience-heading"><h2 id="experience-title">Work, mapped.</h2><p>Explore the places and projects behind my experience.</p></div><div class="experience-layout"><div class="globe-column"><div class="globe-stage"><canvas id="experience-globe" tabindex="0" role="img" aria-label="Interactive globe of experience locations. Drag to rotate; arrow keys rotate. Use the location list to select an experience."></canvas><span class="globe-caption">INDIA / SOUTH ASIA</span></div><div class="globe-controls"><button id="globe-reset">Reset view</button><button id="globe-zoom" aria-pressed="false">Closer view +</button><span>Drag to explore</span></div><p class="map-note">Markers indicate approximate project regions or an education location, not exact field sites. Coastlines: Natural Earth.</p><p id="globe-status" role="status"></p></div><div><div id="experience-list" class="experience-list" aria-label="Choose an experience"></div><article id="experience-detail" class="experience-detail" aria-live="polite"></article></div></div></section>
+<section class="expertise section" id="expertise"><div class="section-top"><span class="eyebrow">04 / EXPERTISE</span><span class="section-counter"></span></div><div class="expertise-layout"><div><h2>Methods &amp; tools.</h2><p>Spatial analysis, automation and environmental assessment.</p></div><div class="capabilities">
+<details open><summary><span>01</span><h3>Remote sensing & spatial analysis</h3><span class="plus">+</span></summary><div><p>Land-cover classification, change detection, terrain analysis, spatial modelling, and the integration of satellite, UAV and LiDAR data.</p><div class="tool-tags"><span>QGIS</span><span>ArcGIS Pro</span><span>Google Earth Engine</span><span>Agisoft</span></div></div></details>
+<details><summary><span>02</span><h3>Automation & spatial systems</h3><span class="plus">+</span></summary><div><p>Repeatable geospatial processing, attribute generation, database design and spatial services that help teams work consistently.</p><div class="tool-tags"><span>Python</span><span>JavaScript</span><span>PostGIS</span><span>GeoServer</span></div></div></details>
+<details><summary><span>03</span><h3>Restoration & carbon monitoring</h3><span class="plus">+</span></summary><div><p>ARR eligibility assessment, strata and sampling design, topology checks, MRV-ready datasets, and maps supporting review and verification.</p><div class="tool-tags"><span>Eligibility</span><span>Sampling</span><span>QA/QC</span><span>MRV</span></div></div></details>
+<details><summary><span>04</span><h3>Environmental research & communication</h3><span class="plus">+</span></summary><div><p>Ecosystem-service and hydrological analysis, clear cartography, technical reports, stakeholder coordination and GIS training.</p><div class="tool-tags"><span>SWAT</span><span>InVEST</span><span>Cartography</span><span>Technical writing</span></div></div></details>
+</div></div></section>
+<section class="research section" id="research"><div class="section-top"><span class="eyebrow">05 / SELECTED RESEARCH</span><span class="section-counter">PUBLICATIONS</span></div><div class="research-heading"><h2>Research &amp; publications.</h2><p>Co-authored work on conservation landscapes, medicinal plants and remote sensing of aquatic environments.</p></div><div class="publication"><span>2024<br><small>BOOK CHAPTER</small></span><div><h3>Temporal Investigation of Chlorophyll-A in the Bhimgoda Barrage and Wetland Landscape Using Remote Sensing and GIS</h3><p>Khali, Mishra, Yadav, Saber & Pande · Springer Nature</p></div></div><div class="publication"><span>2023<br><small>JOURNAL ARTICLE</small></span><div><h3>Ecology and conservation of threatened medicinal plants in the Trans-Himalayan region of Nanda Devi Biosphere Reserve, Western Himalaya</h3><p>Mishra, Kumar & Yadav · Trees, Forests and People</p></div></div><a class="publication linked-publication" href="https://doi.org/10.2305/IUCN.CH.2023.PARKS-29-2NS.en" target="_blank" rel="noopener"><span>2023<br><small>JOURNAL ARTICLE</small></span><div><h3>Identifying Conservation Values: a Case Study in Trans-Himalayan Region of Thanpattan, Lahaul-Spiti, Himachal Pradesh</h3><p>Singh, Yadav & Lyngdoh · PARKS, 29(2), 31–40</p></div><b aria-hidden="true">↗</b></a><div class="publication"><span>2021<br><small>TECHNICAL REPORT</small></span><div><h3>High conservation values and management recommendations for SECURE Himalaya landscapes in Himachal Pradesh</h3><p>Lyngdoh, Sathyakumar, Bhatnagar, Singh & Yadav · Wildlife Institute of India</p></div></div></section>
+<section class="contact section" id="contact"><div class="section-top"><span class="eyebrow">06 / CONTACT</span><span class="section-counter"></span></div><h2>Get in touch.<i aria-hidden="true">↗</i></h2><div class="contact-bottom"><a class="button primary" href="mailto:email2shivyadav@gmail.com">Email me <span aria-hidden="true">↗</span></a><div class="email-group"><a href="mailto:email2shivyadav@gmail.com">email2shivyadav@gmail.com</a><button id="copy-email" aria-label="Copy email address">Copy email <span aria-hidden="true">⧉</span></button><span id="copy-status" role="status"></span></div><a class="text-link" href="profile.html" target="_blank" rel="noopener">Professional profile ↗</a></div></section>
+</main><footer class="footer"><a href="#home">SHIV NARAYAN YADAV</a><span>GIS · REMOTE SENSING · ENVIRONMENT</span><a href="#home">BACK TO TOP ↑</a></footer>
+<dialog id="project-dialog" aria-labelledby="dialog-title"><div class="dialog-top"><span id="dialog-kicker" class="eyebrow"></span><button id="close-project" aria-label="Close project">Close ×</button></div><h2 id="dialog-title"></h2><p id="dialog-intro" class="lead"></p><div id="dialog-content"></div><div class="dialog-bottom"><a class="button primary" href="mailto:email2shivyadav@gmail.com">Discuss this work ↗</a></div></dialog>
+</body></html>

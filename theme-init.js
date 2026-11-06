@@ -1,0 +1,1 @@
+let savedTheme;try{savedTheme=localStorage.getItem('portfolio-theme');}catch{}document.documentElement.dataset.theme=['dark','light'].includes(savedTheme)?savedTheme:matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
