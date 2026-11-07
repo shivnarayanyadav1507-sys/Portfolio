@@ -16,20 +16,23 @@ function controls() {
   toggle.classList.toggle('is-paused', paused);
   stage.dataset.paused = String(paused);
 }
-// Remove pale background connected to image edges for the forest-green theme.
-const darkFrameCache=new Map();
-function darkFrame(index){
- if(darkFrameCache.has(index))return darkFrameCache.get(index);
+// Edge-connected background matte, used in both themes. A narrow inward
+// feather removes the source's light fringe without cutting interior shirt details.
+const matteCache=new Map();
+function matteFrame(index){
+ if(matteCache.has(index))return matteCache.get(index);
  const out=document.createElement('canvas');out.width=canvas.width;out.height=canvas.height;
- const c=out.getContext('2d',{willReadFrequently:true});c.drawImage(frames[index],0,0,out.width,out.height);
- const image=c.getImageData(0,0,out.width,out.height),data=image.data,W=out.width,H=out.height;
- const seen=new Uint8Array(W*H),queue=new Int32Array(W*H);let head=0,tail=0;
- function add(i){if(i<0||i>=W*H||seen[i])return;seen[i]=1;const p=i*4,r=data[p],g=data[p+1],b=data[p+2];if(r>170&&g>175&&b>155&&Math.abs(r-g)<13&&Math.abs(g-b)<32){queue[tail++]=i;data[p+3]=0;}}
+ const c=out.getContext('2d',{willReadFrequently:true});c.drawImage(frames[index],0,0);
+ const image=c.getImageData(0,0,out.width,out.height),data=image.data,W=out.width,H=out.height,N=W*H;
+ const seen=new Uint8Array(N),queue=new Int32Array(N),dist=new Float32Array(N);dist.fill(999);let head=0,tail=0;
+ function add(i){if(i<0||i>=N||seen[i])return;seen[i]=1;const p=i*4,r=data[p],g=data[p+1],b=data[p+2];if(r>164&&g>169&&b>147&&Math.abs(r-g)<17&&Math.abs(g-b)<37){queue[tail++]=i;dist[i]=0;}}
  for(let x=0;x<W;x++){add(x);add((H-1)*W+x);}for(let y=0;y<H;y++){add(y*W);add(y*W+W-1);}
  while(head<tail){const i=queue[head++];if(i%W)add(i-1);if(i%W<W-1)add(i+1);add(i-W);add(i+W);}
- const alpha=new Uint8Array(W*H);for(let i=0;i<alpha.length;i++)alpha[i]=data[i*4+3];
- for(let y=1;y<H-1;y++)for(let x=1;x<W-1;x++){const i=y*W+x;data[i*4+3]=Math.min(alpha[i],alpha[i-1],alpha[i+1],alpha[i-W],alpha[i+W]);}
- c.putImageData(image,0,0);darkFrameCache.set(index,out);if(darkFrameCache.size>8)darkFrameCache.delete(darkFrameCache.keys().next().value);return out;
+ // Chamfer distance to the connected background; no per-frame animation of alpha.
+ for(let y=1;y<H;y++)for(let x=1;x<W;x++){const i=y*W+x;dist[i]=Math.min(dist[i],dist[i-1]+1,dist[i-W]+1,dist[i-W-1]+1.414);}
+ for(let y=H-2;y>=0;y--)for(let x=W-2;x>=0;x--){const i=y*W+x;dist[i]=Math.min(dist[i],dist[i+1]+1,dist[i+W]+1,dist[i+W+1]+1.414);}
+ for(let i=0;i<N;i++){const a=Math.max(0,Math.min(1,(dist[i]-2.2)/1.5));data[i*4+3]=Math.round(a*255);}
+ c.putImageData(image,0,0);matteCache.set(index,out);if(matteCache.size>12)matteCache.delete(matteCache.keys().next().value);return out;
 }
 window.addEventListener('themechange',()=>{drawn=-1;draw();});
 
@@ -41,7 +44,7 @@ function draw() {
   }
   if (selected < 0 || selected === drawn) return;
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.drawImage(document.documentElement.dataset.theme==='dark'?darkFrame(selected):frames[selected], 0, 0, canvas.width, canvas.height);
+  ctx.drawImage(matteFrame(selected), 0, 0, canvas.width, canvas.height);
   drawn = selected;
   stage.classList.add('is-ready');
   stage.dataset.frame = String(selected);

@@ -1,0 +1,9 @@
+# Credits
+- Fredoka: Google Fonts, SIL Open Font License; assets/fonts/OFL.txt.
+- Social icons: Simple Icons, CC0; assets/icons/LICENSE.txt. LinkedIn v11, other icons v14. Brand marks belong to their owners.
+- D3 array and geo: ISC licenses in vendor/.
+- Globe coastlines: Natural Earth, public domain.
+- Character: supplied portfolio artwork and video frames.
+- User-supplied UI references: Uiverse profile card by narmesh_sah; weather card by vinodjangid07; folder by junaid_3671; social row by Valeron-T. Adapted for this portfolio.
+- Magnetic dock behavior inspired by Componentry; implemented in plain JavaScript for GitHub Pages.
+- Weather: Open-Meteo. Location is requested only on button press, rounded to two decimals and sent to Open-Meteo; this site does not store it.
