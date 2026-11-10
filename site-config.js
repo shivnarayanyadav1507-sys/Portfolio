@@ -8,6 +8,6 @@ window.PORTFOLIO_CONFIG = {
     discord: 'stillsbyshiv',
     github: 'https://github.com/shivnarayanyadav1507-sys'
   },
-  cv: 'assets/CV_Shiv_Narayan_Yadav.pdf', // To update the CV, replace this PDF (keep the same file name).
+  cv: 'cv.html', // The CV page; its Download button serves assets/CV_Shiv_Narayan_Yadav.pdf
   weather: null // Optional fixed city: {name:'Your city',latitude:0,longitude:0}.
 };
