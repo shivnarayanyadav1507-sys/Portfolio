@@ -123,6 +123,7 @@ main#cv-main { max-width: 1320px; margin: 0 auto; padding: 0 clamp(16px, 3vw, 40
 .cv-split { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 28px 48px; align-items: start; }
 .cv-split > div { display: flex; flex-direction: column; gap: 24px; }
 .refs { display: flex; flex-direction: column; gap: 12px; }
+.refs-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr)); }
 .refs article { display: flex; flex-direction: column; gap: 4px; padding: 18px 20px; border-radius: 16px; background: var(--panel); }
 .refs h3 { font-size: 18px; font-weight: 800; }
 .refs h3 .muted { font-weight: 600; font-size: 15px; }
