@@ -22,12 +22,10 @@
   const list = document.getElementById('timeline');
   const canvas = document.getElementById('journey-globe');
   const statusEl = document.getElementById('globe-status');
-  const zoomBtn = document.getElementById('globe-zoom');
   const resetBtn = document.getElementById('globe-reset');
   if (!list || !canvas) return;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  const CLOSE = 2.6, WORLD = 1;
-  let selected = 5, lon = 88, lat = 25, zoom = CLOSE, land = null, w = 0, h = 0, drag = null, raf = 0;
+  let selected = 5, lon = 80, lat = 18, zoom = 1, land = null, w = 0, h = 0, drag = null, raf = 0;
   const ctx = canvas.getContext('2d');
 
   /* ----- timeline ----- */
@@ -86,13 +84,18 @@
     ctx.fillStyle = col.sphere; ctx.fill(); ctx.clip();
     ctx.beginPath(); path(d3.geoGraticule10()); ctx.strokeStyle = col.grid; ctx.lineWidth = 1; ctx.stroke();
     if (land) { ctx.beginPath(); path(land); ctx.fillStyle = col.land; ctx.fill(); ctx.strokeStyle = col.coast; ctx.lineWidth = .9; ctx.stroke(); }
+    const shade = ctx.createRadialGradient(w / 2 - lens * .38, h / 2 - lens * .42, lens * .05, w / 2, h / 2, lens);
+    shade.addColorStop(0, 'rgba(255, 255, 255, 0.22)');
+    shade.addColorStop(.55, 'rgba(255, 255, 255, 0)');
+    shade.addColorStop(1, 'rgba(0, 0, 0, 0.22)');
+    ctx.fillStyle = shade; ctx.fillRect(w / 2 - lens, h / 2 - lens, lens * 2, lens * 2);
     const order = experiences.map((e, i) => i).sort((a, b) => (a === selected) - (b === selected));
     order.forEach(i => {
       const e = experiences[i];
       if (d3.geoDistance([e.lon, e.lat], [lon, lat]) > Math.PI / 2) return;
       const [x, y] = proj([e.lon, e.lat]);
       const on = i === selected;
-      ctx.beginPath(); ctx.arc(x, y, on ? 9 : 5.5, 0, Math.PI * 2);
+      ctx.beginPath(); ctx.arc(x, y, on ? 8 : 4.5, 0, Math.PI * 2);
       if (on) { ctx.lineWidth = 6; ctx.strokeStyle = col.accent; ctx.stroke(); ctx.fillStyle = col.ink; ctx.fill(); }
       else { ctx.fillStyle = col.accent; ctx.fill(); ctx.lineWidth = 1.6; ctx.strokeStyle = col.ink; ctx.stroke(); }
     });
@@ -136,15 +139,8 @@
     if (!k) return; e.preventDefault(); cancelAnimationFrame(raf);
     lon += k[0] / zoom * 2; lat = Math.max(-75, Math.min(75, lat + k[1] / zoom * 2)); render();
   });
-  zoomBtn.addEventListener('click', () => {
-    zoom = zoom === CLOSE ? WORLD : CLOSE;
-    zoomBtn.textContent = zoom === CLOSE ? 'World view' : 'Closer view';
-    zoomBtn.setAttribute('aria-pressed', String(zoom === CLOSE));
-    const e = experiences[selected]; fly(e.lon, e.lat);
-  });
   resetBtn.addEventListener('click', () => {
-    zoom = CLOSE; zoomBtn.textContent = 'World view'; zoomBtn.setAttribute('aria-pressed', 'true');
-    select(5, false); fly(88, 25);
+    select(5, false); fly(80, 18);
   });
   window.addEventListener('themechange', () => { col = colors(); render(); });
   window.addEventListener('resize', size);

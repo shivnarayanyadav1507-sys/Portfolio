@@ -79,6 +79,14 @@
     const name = a.textContent.trim();
     if (url && /^https:\/\//.test(url)) {
       a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.setAttribute('aria-label', name);
+    } else if (url && typeof url === 'string') {
+      a.setAttribute('aria-label', `${name}: copy username ${url}`);
+      a.addEventListener('click', async e => {
+        e.preventDefault();
+        let ok = true;
+        try { await navigator.clipboard.writeText(url); } catch (err) { ok = false; }
+        if (socialStatus) socialStatus.textContent = ok ? `${name} username “${url}” copied.` : `${name} username: ${url}`;
+      });
     } else {
       a.setAttribute('aria-label', `${name}, profile coming soon`);
       a.addEventListener('click', e => { e.preventDefault(); if (socialStatus) socialStatus.textContent = `${name} profile link coming soon.`; });
