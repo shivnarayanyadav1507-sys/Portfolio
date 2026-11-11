@@ -226,7 +226,7 @@ main { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap:
 .ticket-bars { width: 110px; height: 10px; opacity: .45; background: repeating-linear-gradient(90deg, currentColor 0 2px, transparent 2px 4px, currentColor 4px 5px, transparent 5px 8px, currentColor 8px 11px, transparent 11px 13px); }
 .ticket-stub { flex: 0 0 var(--stub); display: grid; place-items: center; background: #cde64a; color: #161a14; }
 .ticket-stub b { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 18px; font-weight: 900; letter-spacing: .02em; }
-[data-theme="dark"] .ticket-main { background: #0c1712; box-shadow: inset 0 0 0 1px rgba(231, 237, 221, .08); }
+[data-theme="dark"] .ticket-main { background: #e7eddd; color: #12221b; }
 /* phone top bar: one-line ticket */
 .ticket-mini { --stub: 20px; --notch: 4px; min-height: 38px; border-radius: 9px; }
 .ticket-mini .ticket-main { flex-direction: row; align-items: center; justify-content: flex-start; gap: 8px; padding: 0 10px 0 12px; border-right-width: 1.5px; }
