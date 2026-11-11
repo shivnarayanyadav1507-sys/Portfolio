@@ -9,16 +9,12 @@
   const meta = document.querySelector('meta[name="theme-color"]');
   function paintToggles() {
     const dark = root.dataset.theme === 'dark';
-    toggles.forEach(btn => {
-      btn.setAttribute('aria-label', `Switch to ${dark ? 'light' : 'dark'} theme`);
-      btn.setAttribute('aria-pressed', String(dark));
-      btn.querySelector('span').textContent = dark ? 'Light' : 'Dark';
-    });
+    toggles.forEach(input => { input.checked = dark; });
     if (meta) meta.content = dark ? '#12221b' : '#d8d5ca';
     window.dispatchEvent(new Event('themechange'));
   }
-  toggles.forEach(btn => btn.addEventListener('click', () => {
-    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+  toggles.forEach(input => input.addEventListener('change', () => {
+    const next = input.checked ? 'dark' : 'light';
     root.dataset.theme = next;
     try { localStorage.setItem('portfolio-theme', next); } catch (e) { /* storage blocked */ }
     paintToggles();
@@ -108,24 +104,57 @@
     card.addEventListener('pointerleave', () => { card.style.setProperty('--tx', '0deg'); card.style.setProperty('--ty', '0deg'); });
   }
 
-  /* ---------- weather (Open-Meteo, only after the visitor asks) ---------- */
+  /* ---------- weather card (Open-Meteo, only after the visitor asks) ---------- */
   const wBtn = document.getElementById('weather-location');
   const wStatus = document.getElementById('weather-status');
-  const codes = {0:'Clear sky',1:'Mainly clear',2:'Partly cloudy',3:'Overcast',45:'Fog',48:'Freezing fog',51:'Light drizzle',53:'Drizzle',55:'Heavy drizzle',56:'Freezing drizzle',57:'Freezing drizzle',61:'Light rain',63:'Rain',65:'Heavy rain',66:'Freezing rain',67:'Freezing rain',71:'Light snow',73:'Snow',75:'Heavy snow',77:'Snow grains',80:'Rain showers',81:'Rain showers',82:'Heavy showers',85:'Snow showers',86:'Snow showers',95:'Thunderstorms',96:'Thunderstorms, hail',99:'Thunderstorms, hail'};
+  const wIcon = document.getElementById('weather-icon');
+  const wList = document.getElementById('weather-forecast');
+  const codes = {0:'Clear sky',1:'Mainly clear',2:'Partly cloudy',3:'Overcast',45:'Fog',48:'Freezing fog',51:'Light drizzle',53:'Drizzle',55:'Heavy drizzle',56:'Freezing drizzle',57:'Freezing drizzle',61:'Light rain',63:'Rain',65:'Heavy rain',66:'Freezing rain',67:'Freezing rain',71:'Light snow',73:'Snow',75:'Heavy snow',77:'Snow grains',80:'Rain showers',81:'Rain showers',82:'Heavy showers',85:'Snow showers',86:'Snow showers',95:'Thunderstorm',96:'Thunderstorm, hail',99:'Thunderstorm, hail'};
+  const cloud = 'M22 14.35C22 17.47 19.44 20 16.29 20H11M14.38 9.03a5.7 5.7 0 0 1 3.77-.01M7.12 11.61a4.3 4.3 0 0 0-.83-.08C3.92 11.53 2 13.43 2 15.76 2 18.1 3.92 20 6.29 20H7M7.12 11.61a5.6 5.6 0 0 1-.36-1.96C6.76 6.53 9.32 4 12.48 4c2.94 0 5.36 2.19 5.68 5.01M7.12 11.61c.56.11 1.09.33 1.55.63M18.16 9.01A5.7 5.7 0 0 1 20 10.06';
+  const icons = {
+    sun: '<circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/>',
+    cloud: `<path d="${cloud}"/>`,
+    rain: '<path d="M17.5 15.5a4.5 4.5 0 0 0-1-8.9A6 6 0 0 0 5 8.5a3.5 3.5 0 0 0 .5 7"/><path d="M8 17l-1 3M12 17l-1 3M16 17l-1 3"/>',
+    snow: '<path d="M17.5 14.5a4.5 4.5 0 0 0-1-8.9A6 6 0 0 0 5 7.5a3.5 3.5 0 0 0 .5 7"/><path d="M8 18h.01M12 18h.01M16 18h.01M10 21h.01M14 21h.01"/>',
+    storm: '<path d="M17.5 14.5a4.5 4.5 0 0 0-1-8.9A6 6 0 0 0 5 7.5a3.5 3.5 0 0 0 .5 7"/><path d="M13 12l-3 5h4l-3 5"/>',
+    fog: '<path d="M4 9h16M2 13h20M5 17h14M8 21h8"/>'
+  };
+  const kind = c => c <= 1 ? 'sun' : c <= 3 ? 'cloud' : c <= 48 ? 'fog' : c <= 67 || (c >= 80 && c <= 82) ? 'rain' : c <= 86 ? 'snow' : 'storm';
+  const setIcon = k => { if (wIcon) wIcon.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${icons[k]}</svg>`; };
+  const dayLabel = d => d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short' });
+  const noon = iso => new Date(iso + 'T12:00:00');
+  function paintForecast(rows) {
+    if (!wList) return;
+    wList.innerHTML = rows.map(r => `<li><span>${r.label}</span><b>${r.temp}</b></li>`).join('');
+  }
+  // before any data: today's date and the next three days, temperatures blank
+  (function weatherPlaceholder() {
+    const today = new Date();
+    const el = document.getElementById('weather-date');
+    if (el) el.textContent = dayLabel(today);
+    setIcon('cloud');
+    paintForecast([1, 2, 3].map(n => { const d = new Date(today); d.setDate(d.getDate() + n); return { label: dayLabel(d), temp: '—°' }; }));
+  })();
   async function loadWeather(lat, lon, place) {
     const abort = new AbortController();
     const timer = setTimeout(() => abort.abort(), 12000);
     try {
       const u = new URL('https://api.open-meteo.com/v1/forecast');
-      u.search = new URLSearchParams({ latitude: lat.toFixed(2), longitude: lon.toFixed(2), current: 'temperature_2m,weather_code', daily: 'temperature_2m_max,temperature_2m_min', forecast_days: 1, timezone: 'auto' });
+      u.search = new URLSearchParams({ latitude: lat.toFixed(2), longitude: lon.toFixed(2), current: 'temperature_2m,weather_code', daily: 'temperature_2m_max,temperature_2m_min', forecast_days: 4, timezone: 'auto' });
       const r = await fetch(u, { signal: abort.signal });
       if (!r.ok) throw new Error('bad response');
       const d = await r.json();
       if (!Number.isFinite(d.current && d.current.temperature_2m)) throw new Error('no data');
-      document.getElementById('weather-temp').textContent = Math.round(d.current.temperature_2m) + '°';
-      document.getElementById('weather-place').textContent = `${place} · ${codes[d.current.weather_code] || 'Now'}`;
-      document.getElementById('weather-low').textContent = Math.round(d.daily.temperature_2m_min[0]) + '°';
-      document.getElementById('weather-high').textContent = Math.round(d.daily.temperature_2m_max[0]) + '°';
+      const code = d.current.weather_code;
+      document.getElementById('weather-temp').textContent = Math.round(d.current.temperature_2m) + '°C';
+      document.getElementById('weather-condition').textContent = codes[code] || 'Now';
+      document.getElementById('weather-place').textContent = place;
+      document.getElementById('weather-date').textContent = dayLabel(noon(d.daily.time[0]));
+      setIcon(kind(code));
+      paintForecast(d.daily.time.slice(1, 4).map((t, i) => ({
+        label: dayLabel(noon(t)),
+        temp: `${Math.round(d.daily.temperature_2m_max[i + 1])}°<small> / ${Math.round(d.daily.temperature_2m_min[i + 1])}°</small>`
+      })));
       wStatus.textContent = '';
       wBtn.textContent = 'Refresh';
     } catch (e) {
@@ -143,7 +172,7 @@
         { timeout: 10000, maximumAge: 300000, enableHighAccuracy: false }
       );
     });
-    if (config.weather) { wBtn.textContent = 'Show weather'; }
+    if (config.weather) { wBtn.textContent = 'Show weather'; document.getElementById('weather-place').textContent = config.weather.name; }
   }
 
   /* ---------- project details dialog ---------- */
