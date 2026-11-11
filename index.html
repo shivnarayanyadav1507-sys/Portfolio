@@ -9,11 +9,12 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/archivo-variable.woff2" as="font" type="font/woff2" crossorigin>
 <script src="theme-init.js"></script>
-<link rel="stylesheet" href="site.css?v=4">
+<link rel="stylesheet" href="site.css?v=6">
 <script src="site-config.js?v=2" defer></script>
 <script src="vendor/d3-array.min.js" defer></script>
 <script src="vendor/d3-geo.min.js" defer></script>
-<script src="site.js?v=4" defer></script>
+<script src="site.js?v=5" defer></script>
+<script src="clock.js?v=2" defer></script>
 <script src="journey.js?v=2" defer></script>
 <script type="module" src="character.js?v=2"></script>
 </head>
@@ -105,30 +106,13 @@
               <li>Earth observation</li>
             </ul>
           </div>
-          <div class="weather-wrap">
-            <aside class="weather-card" aria-label="Local weather">
-              <svg class="wx-bg" viewBox="0 0 342 175" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="wx-grad" gradientUnits="userSpaceOnUse" x1="0" y1="128" x2="354.142" y2="128"><stop stop-color="#5936B4"/><stop offset="1" stop-color="#362A84"/></linearGradient></defs><path fill="url(#wx-grad)" d="M0 66.4396C0 31.6455 0 14.2484 11.326 5.24044C22.6519 -3.76754 39.6026 0.147978 73.5041 7.97901L307.903 62.1238C324.259 65.9018 332.436 67.7909 337.218 73.8031C342 79.8154 342 88.2086 342 104.995V131C342 151.742 342 162.113 335.556 168.556C329.113 175 318.742 175 298 175H44C23.2582 175 12.8873 175 6.44365 168.556C0 162.113 0 151.742 0 131V66.4396Z"/></svg>
-              <div class="wx-cloud" id="weather-icon" aria-hidden="true"></div>
-              <div class="wx-top">
-                <p class="wx-temp" id="weather-temp">--°</p>
-                <p class="wx-when"><span id="weather-date"></span> · <time id="weather-time"></time></p>
-              </div>
-              <div class="wx-info">
-                <div class="wx-info-left">
-                  <p class="wx-gray">H:<span id="weather-high">--</span>° L:<span id="weather-low">--</span>°</p>
-                  <p class="wx-place" id="weather-place">Your area</p>
-                </div>
-                <div class="wx-info-right">
-                  <span id="weather-condition" hidden></span>
-                  <button type="button" id="weather-location">Use my location</button>
-                </div>
-              </div>
-            </aside>
-            <div class="weather-foot">
-              <p id="weather-status" role="status"></p>
-              <a href="https://open-meteo.com/" target="_blank" rel="noopener">Weather: Open-Meteo</a>
+          <section class="glass orbit-clock" aria-label="Current date and time">
+            <svg class="orbit-svg" id="orbit-clock" viewBox="0 0 220 150" aria-hidden="true" focusable="false"></svg>
+            <div class="orbit-read">
+              <time class="orbit-time" id="orbit-time"><span class="orbit-hm" id="orbit-hm">--:--</span><span class="orbit-side"><span id="orbit-ampm"></span><span id="orbit-sec"></span></span></time>
+              <p class="orbit-date" id="orbit-date"></p>
             </div>
-          </div>
+          </section>
         </div>
       </div>
     </section>

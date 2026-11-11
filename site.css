@@ -212,39 +212,25 @@ main { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap:
 .hero-stage.is-ready .character-poster { opacity: 0; transition: opacity .35s ease; }
 .hero-right { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px; }
 .focus-card { flex: 1 1 200px; display: flex; flex-direction: column; gap: 10px; padding: 16px 18px; }
-/* ---------- weather card (after sahilxkhadka on Uiverse.io) ---------- */
-.weather-wrap { flex: 1 1 200px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
-.weather-card { position: relative; isolation: isolate; container-type: inline-size; display: flex; flex-direction: column; justify-content: space-between; gap: 10px; min-height: 150px; padding: 18px 16px 16px; margin-top: 18px; color: #fff; }
-.wx-bg { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; filter: drop-shadow(0 14px 22px rgba(54, 42, 132, .28)); }
-.wx-cloud { position: absolute; right: -4px; top: -26px; width: 40cqw; max-width: 130px; aspect-ratio: 1; pointer-events: none; }
-.wx-cloud svg { display: block; width: 100%; height: 100%; }
-.wx-top { display: flex; flex-direction: column; gap: 2px; padding-right: 36cqw; }
-.wx-temp { font-size: clamp(38px, 21cqw, 56px); font-weight: 800; line-height: 1; letter-spacing: -.02em; }
-.wx-when { font-size: 12px; font-weight: 600; color: rgba(235, 235, 245, .78); white-space: nowrap; }
-.wx-when time { font-variant-numeric: tabular-nums; }
-.wx-info { display: flex; align-items: flex-end; justify-content: space-between; gap: 8px; font-size: 13px; line-height: 1.3; }
-.wx-info-left { min-width: 0; }
-.wx-gray { color: rgba(235, 235, 245, .6); font-weight: 600; white-space: nowrap; }
-.wx-place { font-weight: 700; overflow-wrap: anywhere; }
-.wx-info-right { flex: none; display: flex; align-items: center; gap: 6px; text-align: right; font-weight: 700; }
-.wx-info-right button { min-height: 36px; padding: 0 12px; border: 1px solid rgba(255, 255, 255, .35); border-radius: 999px; background: rgba(255, 255, 255, .14); color: #fff; font: inherit; font-size: 12px; font-weight: 700; white-space: nowrap; cursor: pointer; }
-.wx-info-right button:hover { background: rgba(255, 255, 255, .24); }
-.wx-info-right button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
-.wx-info-right button.is-icon { width: 36px; padding: 0; display: grid; place-items: center; }
-.wx-info-right button.is-icon svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.wx-info-right button[disabled] { opacity: .6; cursor: progress; }
-.weather-foot { display: flex; justify-content: space-between; gap: 8px; padding: 0 4px; font-size: 11px; color: var(--muted); }
-.weather-foot a { color: var(--muted); }
-#weather-status:empty { display: none; }
-@container (max-width: 210px) {
-  .weather-card { padding: 16px 12px 12px; }
-  .wx-when { font-size: 11px; }
-  .wx-info { font-size: 12px; }
-  .wx-info-right button { padding: 0 10px; font-size: 11px; }
-  .wx-info-right { flex: 0 1 auto; gap: 5px; font-size: 11.5px; line-height: 1.15; }
-  .wx-info-right button.is-icon { width: 32px; min-height: 32px; flex: none; }
-  .wx-place { white-space: nowrap; overflow-wrap: normal; }
-}
+/* ---------- solar system clock (hero) ---------- */
+.orbit-clock { --orb-ring: rgba(22, 26, 20, .16); --orb-star: rgba(22, 26, 20, .28); --orb-p1: #2c3520; --orb-p2: #6f8130; --orb-p3: #8fa62c;
+  flex: 1 1 200px; min-width: 0; display: flex; flex-direction: column; padding: 10px 14px 14px; }
+[data-theme="dark"] .orbit-clock { --orb-ring: rgba(231, 237, 221, .15); --orb-star: rgba(231, 237, 221, .45); --orb-p1: #e7eddd; --orb-p2: #a9c14f; --orb-p3: #cde64a; }
+.orbit-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.orbit-star { fill: var(--orb-star); }
+.orbit-path { fill: none; stroke: var(--orb-ring); stroke-width: 1; }
+.orbit-halo { fill: var(--accent); opacity: .2; }
+.orbit-sun { fill: var(--accent); }
+.orbit-ring { fill: none; stroke: var(--orb-p2); stroke-width: 1.6; }
+.orbit-p1 { fill: var(--orb-p1); }
+.orbit-p2 { fill: var(--orb-p2); }
+.orbit-p3 { fill: var(--orb-p3); }
+.orbit-read { display: flex; flex-direction: column; gap: 6px; margin-top: 2px; padding-top: 10px; border-top: 1px solid var(--orb-ring); }
+.orbit-time { display: flex; align-items: center; gap: 6px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.orbit-hm { font-size: 34px; font-weight: 900; line-height: .9; letter-spacing: -.03em; }
+.orbit-side { display: flex; flex-direction: column; font-size: 11px; font-weight: 800; line-height: 1.15; letter-spacing: .06em; color: var(--muted); }
+.orbit-side span:first-child { color: var(--ink); }
+.orbit-date { font-size: 13px; color: var(--muted); }
 .card-label { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
 .focus-card ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
 .focus-card li { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 16px; line-height: 1.2; }
@@ -434,6 +420,8 @@ body.dialog-open { overflow: hidden; }
   .hero-left .btn { min-height: 46px; padding: 0 18px; font-size: 15px; }
   .hero-right { padding-bottom: 28px; gap: 10px; }
   .focus-card { padding: 12px 14px; gap: 8px; }
+  .orbit-clock { padding: 8px 12px 12px; }
+  .orbit-hm { font-size: 28px; }
   .focus-card ul { gap: 6px; }
   .focus-card li { font-size: 15px; }
   .sidebar { gap: 10px; }
@@ -465,7 +453,6 @@ body.dialog-open { overflow: hidden; }
   .hero-left { flex-basis: 100%; padding-bottom: 8px; padding-top: calc(28cqw * .8 + 72px); }
   .hero-stage { flex-basis: 100%; max-width: 420px; }
   .hero-right { flex-basis: 100%; padding-bottom: 20px; }
-  .weather-wrap { flex-basis: 100%; }
   .dock { gap: 2px; padding: 5px; }
   .dock a { width: 42px; height: 42px; }
   .tl-detail { padding-left: 18px; }

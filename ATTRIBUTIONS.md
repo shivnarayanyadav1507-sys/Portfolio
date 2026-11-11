@@ -7,7 +7,7 @@
 - D3 array and geo: ISC licenses in vendor/.
 - Globe coastlines: Natural Earth, public domain.
 - Character: supplied portfolio artwork and video frames.
-- User-supplied UI references: Uiverse profile card by narmesh_sah; weather card by sahilxkhadka; sun and moon theme switch by Galahhad (both MIT, via Uiverse.io); folder by junaid_3671; social row by Valeron-T. Adapted for this portfolio.
+- User-supplied UI references: Uiverse profile card by narmesh_sah; sun and moon theme switch by Galahhad (MIT, via Uiverse.io); folder by junaid_3671; social row by Valeron-T. Adapted for this portfolio.
 - Layout inspiration: heynesh.com (sidebar, wordmark hero, year-by-year journey) and an editorial CV page reference supplied by the user. Original design and code; nothing copied.
 - Magnetic dock behavior inspired by Componentry; implemented in plain JavaScript for GitHub Pages.
-- Weather: Open-Meteo. Location is requested only on button press, rounded to two decimals and sent to Open-Meteo; this site does not store it.
+- Solar system clock: original design for this portfolio. It reads the visitor's own device clock; nothing is sent anywhere.
