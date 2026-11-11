@@ -108,57 +108,62 @@
   const wBtn = document.getElementById('weather-location');
   const wStatus = document.getElementById('weather-status');
   const wIcon = document.getElementById('weather-icon');
-  const wList = document.getElementById('weather-forecast');
-  const codes = {0:'Clear sky',1:'Mainly clear',2:'Partly cloudy',3:'Overcast',45:'Fog',48:'Freezing fog',51:'Light drizzle',53:'Drizzle',55:'Heavy drizzle',56:'Freezing drizzle',57:'Freezing drizzle',61:'Light rain',63:'Rain',65:'Heavy rain',66:'Freezing rain',67:'Freezing rain',71:'Light snow',73:'Snow',75:'Heavy snow',77:'Snow grains',80:'Rain showers',81:'Rain showers',82:'Heavy showers',85:'Snow showers',86:'Snow showers',95:'Thunderstorm',96:'Thunderstorm, hail',99:'Thunderstorm, hail'};
-  const cloud = 'M22 14.35C22 17.47 19.44 20 16.29 20H11M14.38 9.03a5.7 5.7 0 0 1 3.77-.01M7.12 11.61a4.3 4.3 0 0 0-.83-.08C3.92 11.53 2 13.43 2 15.76 2 18.1 3.92 20 6.29 20H7M7.12 11.61a5.6 5.6 0 0 1-.36-1.96C6.76 6.53 9.32 4 12.48 4c2.94 0 5.36 2.19 5.68 5.01M7.12 11.61c.56.11 1.09.33 1.55.63M18.16 9.01A5.7 5.7 0 0 1 20 10.06';
-  const icons = {
-    sun: '<circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/>',
-    cloud: `<path d="${cloud}"/>`,
-    rain: '<path d="M17.5 15.5a4.5 4.5 0 0 0-1-8.9A6 6 0 0 0 5 8.5a3.5 3.5 0 0 0 .5 7"/><path d="M8 17l-1 3M12 17l-1 3M16 17l-1 3"/>',
-    snow: '<path d="M17.5 14.5a4.5 4.5 0 0 0-1-8.9A6 6 0 0 0 5 7.5a3.5 3.5 0 0 0 .5 7"/><path d="M8 18h.01M12 18h.01M16 18h.01M10 21h.01M14 21h.01"/>',
-    storm: '<path d="M17.5 14.5a4.5 4.5 0 0 0-1-8.9A6 6 0 0 0 5 7.5a3.5 3.5 0 0 0 .5 7"/><path d="M13 12l-3 5h4l-3 5"/>',
-    fog: '<path d="M4 9h16M2 13h20M5 17h14M8 21h8"/>'
+  const wCond = document.getElementById('weather-condition');
+  const $w = id => document.getElementById(id);
+  const codes = {0:'Clear',1:'Mainly clear',2:'Partly cloudy',3:'Overcast',45:'Fog',48:'Freezing fog',51:'Light drizzle',53:'Drizzle',55:'Heavy drizzle',56:'Freezing drizzle',57:'Freezing drizzle',61:'Light rain',63:'Mid rain',65:'Heavy rain',66:'Freezing rain',67:'Freezing rain',71:'Light snow',73:'Snow',75:'Heavy snow',77:'Snow grains',80:'Showers',81:'Showers',82:'Heavy showers',85:'Snow showers',86:'Snow showers',95:'Thunderstorm',96:'Storm, hail',99:'Storm, hail'};
+  // icon parts taken from the card's own cloud artwork
+  const cloudArt = '<path fill="#fff" d="M18.2 32.5c-.8 0-1.6-.1-2.4-.4c-3.1-1-5.3-3.9-5.3-7.2c0-2.2 1-4.3 2.6-5.7c.4-.4.9-.7 1.4-1l.5-1.8c1.3-4.4 5.4-7.5 10-7.5c.5 0 .9 0 1.5.1c.4.1.8.1 1.2.3l.2-.4c1.9-3.3 5.4-5.4 9.2-5.4C43 3.5 47.7 8.2 47.7 14v1c.4.2.9.4 1.3.6c2.8 1.6 4.5 4.6 4.5 7.8c0 4.2-2.9 7.8-7 8.8c-.7.2-1.4.2-2 .2H18.2z"/><path fill="#b6c1d1" d="M37.1 5c5 0 9 4 9 8.9v.7c-2.1.2-4 1-5.4 2.3c1.1-.6 2.4-1 3.7-1c.5 0 1 .1 1.5.1c.8.2 1.6.5 2.3.9c2.3 1.3 3.8 3.700 3.8 6.5c0 3.6-2.5 6.5-5.8 7.3c-.7.2-1.200.3-1.8.3H18.2c-.7 0-1.3-.1-1.9-.3c-2.4-.8-4.2-3.1-4.2-5.8c0-1.8.8-3.5 2.1-4.6c.6-.5 1.3-.9 2-1.2c.6-.2 1.3-.3 2-.3c2 0 3.7.9 4.9 2.4h.1c-1.3-2.4-3.7-4.1-6.6-4.3c1.1-3.7 4.5-6.4 8.5-6.4c.4 0 .9 0 1.3.1c.8.1 1.6.3 2.300.7c2.7 1.2 4.7 3.7 5.1 6.8V18c0-3.4-1.8-6.5-4.5-8.3C30.8 6.9 33.8 5 37.1 5m0-3C33 2 29.2 4.1 27 7.6h-.3c-.6-.1-1.2-.1-1.7-.1c-5.3 0-10 3.5-11.4 8.6l-.3 1.2c-.4.2-.7.5-1.1.8c-2 1.7-3.1 4.200-3.1 6.9c0 4 2.5 7.4 6.3 8.7c.9.3 1.9.5 2.9.5h26.2c.8 0 1.6-.1 2.4-.3c4.8-1.1 8.2-5.3 8.2-10.3c0-3.8-2-7.3-5.3-9.1c-.2-.1-.3-.2-.5-.3v-.1C49.2 7.4 43.8 2 37.1 2z"/>';
+  const drops = '<g fill="#75d6ff"><path d="M10.8 42.9c-.5 1.5-.1 3 1 3.4c1.1.4 2.4-.5 3-2c.6-1.8.7-4.1.2-6.9c-2.1 1.900-3.6 3.8-4.2 5.5"/><path d="M13.2 57.4c.6-1.8.7-4.1.2-6.9c-2.1 1.8-3.6 3.7-4.2 5.5c-.5 1.5-.1 3 1 3.4c1.1.4 2.5-.5 3-2"/><path d="M51.5 37.4c-2.1 1.8-3.6 3.7-4.2 5.5c-.5 1.5-.1 3 1 3.4c1.1.4 2.4-.5 3-2c.5-1.7.6-4.1.2-6.9"/><path d="M38.2 55.9c-.5 1.5-.1 3 1 3.4s2.4-.5 3-2c.6-1.8.7-4.1.2-6.9c-2 1.9-3.5 3.8-4.2 5.5"/><path d="M46.9 55.9c-.5 1.5-.1 3 1 3.4s2.4-.5 3-2c.6-1.8.7-4.1.2-6.9c-2.1 1.9-3.600 3.8-4.2 5.5"/><path d="M18.6 55.9c-.5 1.5-.1 3 1 3.4s2.4-.5 3-2c.6-1.8.7-4.1.2-6.9c-2.1 1.9-3.6 3.8-4.2 5.5"/></g>';
+  const bolt = '<path fill="#ffce31" d="M24.5 31.9l-4.9 16.2h12.5L27.9 62l16.5-20.2H32.5l2.9-9.9z"/>';
+  const sun = (cx, cy, r) => `<g fill="#ffce31"><circle cx="${cx}" cy="${cy}" r="${r}"/>${[0,45,90,135,180,225,270,315].map(a => `<rect x="${cx - 1.6}" y="${cy - r - 7}" width="3.2" height="5" rx="1.6" transform="rotate(${a} ${cx} ${cy})"/>`).join('')}</g>`;
+  const snow = '<g fill="#e8f4ff"><circle cx="18" cy="44" r="2.6"/><circle cx="32" cy="42" r="2.6"/><circle cx="46" cy="44" r="2.6"/><circle cx="25" cy="54" r="2.6"/><circle cx="39" cy="54" r="2.6"/></g>';
+  const fog = '<g stroke="#d6dcf5" stroke-width="3.4" stroke-linecap="round"><path d="M12 42h40M8 50h46M16 58h32"/></g>';
+  const art = {
+    clear: sun(32, 32, 13),
+    partly: sun(42, 18, 10) + `<g transform="translate(-2 14)">${cloudArt}</g>`,
+    cloud: `<g transform="translate(0 12)">${cloudArt}</g>`,
+    fog: `<g transform="translate(0 2)">${cloudArt}</g>` + fog,
+    rain: cloudArt + drops,
+    snow: cloudArt + snow,
+    storm: cloudArt + drops + bolt
   };
-  const kind = c => c <= 1 ? 'sun' : c <= 3 ? 'cloud' : c <= 48 ? 'fog' : c <= 67 || (c >= 80 && c <= 82) ? 'rain' : c <= 86 ? 'snow' : 'storm';
-  const setIcon = k => { if (wIcon) wIcon.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${icons[k]}</svg>`; };
-  const dayLabel = d => d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short' });
-  const noon = iso => new Date(iso + 'T12:00:00');
-  function paintForecast(rows) {
-    if (!wList) return;
-    wList.innerHTML = rows.map(r => `<li><span>${r.label}</span><b>${r.temp}</b></li>`).join('');
+  const kind = c => c === 0 || c === 1 ? 'clear' : c === 2 ? 'partly' : c === 3 ? 'cloud' : c <= 48 ? 'fog' : c <= 67 || (c >= 80 && c <= 82) ? 'rain' : c <= 86 ? 'snow' : 'storm';
+  const setIcon = k => { if (wIcon) wIcon.innerHTML = `<svg viewBox="0 0 64 64">${art[k]}</svg>`; };
+  // date and time: the visitor's own clock, or the place's time zone once weather has loaded
+  let wZone;
+  function tick() {
+    const now = new Date(); const opt = wZone ? { timeZone: wZone } : {};
+    try {
+      $w('weather-date').textContent = now.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', ...opt });
+      const t = $w('weather-time');
+      t.textContent = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', ...opt });
+      t.dateTime = now.toISOString();
+    } catch (e) { wZone = undefined; }
   }
-  // before any data: today's date and the next three days, temperatures blank
-  (function weatherPlaceholder() {
-    const today = new Date();
-    const el = document.getElementById('weather-date');
-    if (el) el.textContent = dayLabel(today);
-    setIcon('cloud');
-    paintForecast([1, 2, 3].map(n => { const d = new Date(today); d.setDate(d.getDate() + n); return { label: dayLabel(d), temp: '—°' }; }));
-  })();
+  if ($w('weather-time')) { tick(); setInterval(tick, 15000); setIcon('partly'); }
+  const refreshSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></svg>';
   async function loadWeather(lat, lon, place) {
     const abort = new AbortController();
     const timer = setTimeout(() => abort.abort(), 12000);
     try {
       const u = new URL('https://api.open-meteo.com/v1/forecast');
-      u.search = new URLSearchParams({ latitude: lat.toFixed(2), longitude: lon.toFixed(2), current: 'temperature_2m,weather_code', daily: 'temperature_2m_max,temperature_2m_min', forecast_days: 4, timezone: 'auto' });
+      u.search = new URLSearchParams({ latitude: lat.toFixed(2), longitude: lon.toFixed(2), current: 'temperature_2m,weather_code', daily: 'temperature_2m_max,temperature_2m_min', forecast_days: 1, timezone: 'auto' });
       const r = await fetch(u, { signal: abort.signal });
       if (!r.ok) throw new Error('bad response');
       const d = await r.json();
       if (!Number.isFinite(d.current && d.current.temperature_2m)) throw new Error('no data');
       const code = d.current.weather_code;
-      document.getElementById('weather-temp').textContent = Math.round(d.current.temperature_2m) + '°C';
-      document.getElementById('weather-condition').textContent = codes[code] || 'Now';
-      document.getElementById('weather-place').textContent = place;
-      document.getElementById('weather-date').textContent = dayLabel(noon(d.daily.time[0]));
+      $w('weather-temp').textContent = Math.round(d.current.temperature_2m) + '°';
+      $w('weather-high').textContent = Math.round(d.daily.temperature_2m_max[0]);
+      $w('weather-low').textContent = Math.round(d.daily.temperature_2m_min[0]);
+      $w('weather-place').textContent = place;
+      wCond.textContent = codes[code] || 'Now'; wCond.hidden = false;
       setIcon(kind(code));
-      paintForecast(d.daily.time.slice(1, 4).map((t, i) => ({
-        label: dayLabel(noon(t)),
-        temp: `${Math.round(d.daily.temperature_2m_max[i + 1])}°<small> / ${Math.round(d.daily.temperature_2m_min[i + 1])}°</small>`
-      })));
+      if (d.timezone && d.timezone !== 'GMT') { wZone = d.timezone; tick(); }
       wStatus.textContent = '';
-      wBtn.textContent = 'Refresh';
+      wBtn.classList.add('is-icon'); wBtn.innerHTML = refreshSvg; wBtn.setAttribute('aria-label', 'Refresh weather');
     } catch (e) {
-      wStatus.textContent = 'Weather is unavailable right now. Please try again.';
+      wStatus.textContent = 'Weather is unavailable right now.';
     } finally { clearTimeout(timer); wBtn.disabled = false; }
   }
   if (wBtn) {
@@ -168,11 +173,11 @@
       if (!navigator.geolocation) { wStatus.textContent = 'Location is not available in this browser.'; wBtn.disabled = false; return; }
       navigator.geolocation.getCurrentPosition(
         p => loadWeather(p.coords.latitude, p.coords.longitude, 'Near you'),
-        () => { wStatus.textContent = 'Location not shared. Allow access to see local weather.'; wBtn.disabled = false; },
+        () => { wStatus.textContent = 'Location not shared.'; wBtn.disabled = false; },
         { timeout: 10000, maximumAge: 300000, enableHighAccuracy: false }
       );
     });
-    if (config.weather) { wBtn.textContent = 'Show weather'; document.getElementById('weather-place').textContent = config.weather.name; }
+    if (config.weather) { wBtn.textContent = 'Show weather'; $w('weather-place').textContent = config.weather.name; }
   }
 
   /* ---------- project details dialog ---------- */
