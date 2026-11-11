@@ -212,6 +212,13 @@ main { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap:
 .hero-stage.is-ready .character-poster { opacity: 0; transition: opacity .35s ease; }
 .hero-right { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px; }
 .focus-card { flex: 1 1 200px; display: flex; flex-direction: column; gap: 10px; padding: 16px 18px; }
+/* ---------- visitor badge ---------- */
+.visitor-badge { display: inline-flex; align-items: center; gap: 7px; min-height: 36px; padding: 0 14px 0 12px; border-radius: 999px; background: var(--glass); border: 1px solid var(--glass-border); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); font-size: 13px; color: var(--muted); white-space: nowrap; }
+.visitor-badge[hidden] { display: none; }
+.visitor-badge b { font-weight: 900; font-size: 15px; color: var(--ink); font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+.visitor-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent); }
+.hero-tools { align-items: center; gap: 12px; }
+@media (max-width: 420px) { .visitor-badge { padding: 0 10px; gap: 5px; font-size: 12px; } .visitor-badge b { font-size: 14px; } }
 /* ---------- solar system clock (hero) ---------- */
 .orbit-clock { --orb-ring: rgba(22, 26, 20, .16); --orb-star: rgba(22, 26, 20, .28); --orb-p1: #2c3520; --orb-p2: #6f8130; --orb-p3: #8fa62c;
   flex: 1 1 200px; min-width: 0; display: flex; flex-direction: column; padding: 10px 14px 14px; }

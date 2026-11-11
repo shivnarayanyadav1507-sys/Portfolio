@@ -9,12 +9,13 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/archivo-variable.woff2" as="font" type="font/woff2" crossorigin>
 <script src="theme-init.js"></script>
-<link rel="stylesheet" href="site.css?v=6">
-<script src="site-config.js?v=2" defer></script>
+<link rel="stylesheet" href="site.css?v=7">
+<script src="site-config.js?v=3" defer></script>
 <script src="vendor/d3-array.min.js" defer></script>
 <script src="vendor/d3-geo.min.js" defer></script>
 <script src="site.js?v=5" defer></script>
 <script src="clock.js?v=2" defer></script>
+<script src="visits.js?v=1" defer></script>
 <script src="journey.js?v=2" defer></script>
 <script type="module" src="character.js?v=2"></script>
 </head>
@@ -23,6 +24,7 @@
 
 <header class="topbar" aria-label="Site header">
   <a class="brand-chip" href="#home" aria-label="Shiv Narayan Yadav, home">shiv.</a>
+  <p class="visitor-badge" data-visitor hidden><span class="visitor-dot" aria-hidden="true"></span><span>You are visitor no.</span> <b data-visitor-no></b></p>
   <label class="theme-switch" title="Light or dark theme">
       <input type="checkbox" class="theme-switch__checkbox theme-toggle" role="switch" aria-label="Dark theme">
       <span class="theme-switch__container" aria-hidden="true">
@@ -69,6 +71,7 @@
     <section class="hero" id="home" aria-labelledby="hero-title">
       <div class="hero-wordmark" aria-hidden="true">SHIV</div>
       <div class="hero-tools">
+        <p class="visitor-badge" data-visitor hidden><span class="visitor-dot" aria-hidden="true"></span><span>You are visitor no.</span> <b data-visitor-no></b></p>
         <label class="theme-switch" title="Light or dark theme">
       <input type="checkbox" class="theme-switch__checkbox theme-toggle" role="switch" aria-label="Dark theme">
       <span class="theme-switch__container" aria-hidden="true">

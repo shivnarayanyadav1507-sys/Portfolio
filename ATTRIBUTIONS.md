@@ -11,3 +11,4 @@
 - Layout inspiration: heynesh.com (sidebar, wordmark hero, year-by-year journey) and an editorial CV page reference supplied by the user. Original design and code; nothing copied.
 - Magnetic dock behavior inspired by Componentry; implemented in plain JavaScript for GitHub Pages.
 - Solar system clock: original design for this portfolio. It reads the visitor's own device clock; nothing is sent anywhere.
+- Visitor stats: GoatCounter (goatcounter.com). No cookies; it records pages, referrers, browser type, screen size and approximate country and region, not who the visitor is.

@@ -8,5 +8,8 @@ window.PORTFOLIO_CONFIG = {
     discord: 'stillsbyshiv',
     github: 'https://github.com/shivnarayanyadav1507-sys'
   },
-  cv: 'cv.html' // The CV page; its Download button serves assets/CV_Shiv_Narayan_Yadav.pdf
+  cv: 'cv.html', // The CV page; its Download button serves assets/CV_Shiv_Narayan_Yadav.pdf
+  // Visitor stats (GoatCounter). Put the site code here, e.g. 'shivyadav' for https://shivyadav.goatcounter.com
+  // Leave it empty ('') to switch visitor counting off completely.
+  goatcounter: ''
 };
