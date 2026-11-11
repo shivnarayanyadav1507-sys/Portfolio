@@ -46,7 +46,6 @@ main#cv-main { max-width: 1320px; margin: 0 auto; padding: 0 clamp(16px, 3vw, 40
 .who-small > span:last-child { padding-left: .62em; }
 .who-big { position: relative; z-index: 0; align-self: flex-start; margin: -.16em 0 0 1.05em; font-family: "Playfair Display", var(--serif); font-style: italic; font-weight: 900; font-size: calc(var(--who) * 1.42); line-height: .96; letter-spacing: -.03em; color: var(--ink); }
 .who-big::after { content: ""; position: absolute; z-index: -1; left: .02em; right: .04em; bottom: .14em; height: .2em; background: var(--accent); border-radius: 4px; }
-.h-outline { font-size: clamp(64px, 8.5vw, 132px); font-weight: 900; font-stretch: 118%; letter-spacing: -.05em; color: transparent; -webkit-text-stroke: 2px var(--ink); }
 .h-serif { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -.02em; }
 .cv-intro p { font-size: 18px; line-height: 1.6; color: var(--text2); text-align: justify; hyphens: auto; }
 .dropcap-letter { float: left; margin: 6px 14px 0 0; font-size: 8.4em; line-height: .78; font-weight: 900; font-stretch: 118%; color: var(--ink); }
@@ -83,12 +82,7 @@ main#cv-main { max-width: 1320px; margin: 0 auto; padding: 0 clamp(16px, 3vw, 40
 .cv-section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; padding-bottom: 14px; border-bottom: 2px solid var(--ink); }
 .cv-section-head h2 { font-size: clamp(40px, 5.4vw, 76px); font-weight: 900; letter-spacing: -.045em; line-height: .92; }
 .cv-section-head h2 .h-serif { font-size: 1.08em; letter-spacing: -.01em; }
-.h-count { font-family: var(--serif); font-style: italic; font-size: clamp(32px, 4vw, 56px); line-height: 1; color: var(--muted); }
 
-.highlights { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr)); gap: 12px; }
-.highlights li { display: flex; flex-direction: column; gap: 8px; padding: 18px 20px; border-radius: 16px; background: var(--panel); }
-.hl-years { font-family: var(--serif); font-style: italic; font-size: 30px; line-height: 1; color: var(--ink); }
-.highlights p { font-size: 15px; line-height: 1.55; color: var(--text2); }
 
 .job { display: grid; grid-template-columns: minmax(0, 260px) minmax(0, 1fr); gap: 12px clamp(20px, 4vw, 56px); padding: 26px 0; border-bottom: 1px solid var(--line-strong); }
 .job-meta { display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: var(--muted); }
@@ -128,8 +122,6 @@ main#cv-main { max-width: 1320px; margin: 0 auto; padding: 0 clamp(16px, 3vw, 40
 .pub-list li::marker { font-family: var(--serif); font-style: italic; font-size: 20px; color: var(--ink); }
 .pub-list a { overflow-wrap: anywhere; }
 
-.cv-split { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 28px 48px; align-items: start; }
-.cv-split > div { display: flex; flex-direction: column; gap: 24px; }
 .refs { display: flex; flex-direction: column; gap: 12px; }
 .refs-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr)); }
 .refs article { display: flex; flex-direction: column; gap: 4px; padding: 18px 20px; border-radius: 16px; background: var(--panel); }

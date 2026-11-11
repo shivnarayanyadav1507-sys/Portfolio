@@ -9,7 +9,7 @@ window.PORTFOLIO_CONFIG = {
     github: 'https://github.com/shivnarayanyadav1507-sys'
   },
   cv: 'cv.html', // The CV page; its Download button serves assets/CV_Shiv_Narayan_Yadav.pdf
-  // Visitor stats (GoatCounter). Put the site code here, e.g. 'shivyadav' for https://shivyadav.goatcounter.com
-  // Leave it empty ('') to switch visitor counting off completely.
-  goatcounter: ''
+  // "You are visitor no." badge (Abacus counter, no account needed).
+  // Counting only runs on the live domain. Set visitorCounter: null to turn the badge off.
+  visitorCounter: { namespace: 'shivyadav-work-gd', key: 'visitors', domain: 'shivyadav.work.gd' }
 };

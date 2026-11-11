@@ -1,47 +1,50 @@
-/* Visitor stats with GoatCounter (no cookies, no personal data).
-   - Records the visit, so Shiv's private dashboard shows unique visitors and locations.
-   - Shows "You are visitor no. N" using the site's total visitor count.
-   Switched off until site-config.js has a goatcounter code. */
+/* "You are visitor no. N" badge, counted with Abacus (free, no account, no cookies).
+   - A browser is counted once: its number is kept in localStorage and shown again on later visits.
+   - Counting only happens on the live domain, so local testing never changes the total.
+   - If storage is blocked or the counter can't be reached, the badge simply stays hidden. */
 (() => {
-  const code = ((window.PORTFOLIO_CONFIG || {}).goatcounter || '').trim().toLowerCase();
-  if (!/^[a-z0-9-]+$/.test(code)) return;
-  const base = `https://${code}.goatcounter.com`;
-
-  /* 1. record this visit */
-  const tag = document.createElement('script');
-  tag.async = true;
-  tag.src = 'https://gc.zgo.at/count.js';
-  tag.dataset.goatcounter = `${base}/count`;
-  document.head.appendChild(tag);
-
-  /* 2. show the visitor number (home page only) */
+  const cfg = (window.PORTFOLIO_CONFIG || {}).visitorCounter;
+  if (!cfg || !cfg.namespace || !cfg.key) return;
   const badges = [...document.querySelectorAll('[data-visitor]')];
   if (!badges.length) return;
+
+  const valid = s => /^[A-Za-z0-9_-]{3,64}$/.test(s);
+  if (!valid(cfg.namespace) || !valid(cfg.key)) return;
+  const live = !cfg.domain || location.hostname === cfg.domain || location.hostname === 'www.' + cfg.domain;
+  const automated = navigator.webdriver === true;
+
+  const STORE = 'portfolio-visitor-no';
+  let saved = null;
+  try { saved = parseInt(localStorage.getItem(STORE), 10); } catch (e) { return; /* storage blocked: can't count once per browser */ }
+
+  if (Number.isFinite(saved) && saved > 0) { show(saved, false); return; }
+  if (!live || automated) return;
+
   const abort = new AbortController();
   const timer = setTimeout(() => abort.abort(), 8000);
-  fetch(`${base}/counter/TOTAL.json`, { signal: abort.signal })
+  fetch(`https://abacus.jasoncameron.dev/hit/${cfg.namespace}/${cfg.key}`, { signal: abort.signal, cache: 'no-store' })
     .then(r => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
     .then(data => {
-      const total = parseInt(String(data.count || '').replace(/[^\d]/g, ''), 10);
-      if (!Number.isFinite(total)) return;
-      // the published total refreshes every few hours, so this visit is counted as the next one
-      show(total + 1);
+      const n = Number(data && data.value);
+      if (!Number.isInteger(n) || n < 1) return;
+      try { localStorage.setItem(STORE, String(n)); } catch (e) { /* ignore */ }
+      show(n, true);
     })
-    .catch(() => { /* blocked or offline: keep the badge hidden */ })
+    .catch(() => { /* offline, blocked or rate limited: keep the badge hidden */ })
     .finally(() => clearTimeout(timer));
 
-  function show(n) {
+  function show(n, animate) {
     const fmt = v => v.toLocaleString('en-GB');
-    badges.forEach(b => { b.hidden = false; });
     const nums = badges.map(b => b.querySelector('[data-visitor-no]'));
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches || n < 10) {
+    badges.forEach(b => { b.hidden = false; });
+    if (!animate || n < 10 || matchMedia('(prefers-reduced-motion: reduce)').matches) {
       nums.forEach(el => { el.textContent = fmt(n); });
       return;
     }
     const t0 = performance.now(), dur = 1200;
     (function step(t) {
       const p = Math.min(1, (t - t0) / dur);
-      const v = Math.round(n * (1 - Math.pow(1 - p, 3)));
+      const v = Math.max(1, Math.round(n * (1 - Math.pow(1 - p, 3))));
       nums.forEach(el => { el.textContent = fmt(v); });
       if (p < 1) requestAnimationFrame(step);
     })(t0);

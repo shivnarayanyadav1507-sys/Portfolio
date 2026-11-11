@@ -247,13 +247,9 @@ main { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap:
 .section { position: relative; border-radius: var(--radius); padding: clamp(32px, 5vw, 72px) clamp(20px, 4vw, 56px); scroll-margin-top: 16px; }
 .wrap { max-width: 1080px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
 .section-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px; }
-.section-head > div { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
 .section-head h2 { font-size: clamp(44px, 6vw, 80px); line-height: .92; font-weight: 900; letter-spacing: -.04em; }
 .section-head h2.huge { font-size: clamp(52px, 8.5vw, 120px); font-stretch: 112%; letter-spacing: -.05em; line-height: .88; }
 .section-head > p { max-width: 36ch; font-size: 18px; color: var(--text2); }
-.section-head.center { justify-content: center; text-align: center; }
-.section-head.center > div { align-items: center; }
-.section-head.center p { font-size: 19px; color: var(--text2); }
 
 /* about */
 .about-grid { display: flex; flex-wrap: wrap; gap: clamp(28px, 4vw, 56px); align-items: flex-start; }
@@ -296,14 +292,13 @@ main { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap:
 /* work */
 .section-dark { background: var(--work-bg); color: var(--work-text); }
 .section-dark .section-head > p { color: var(--work-muted); }
-.pill-accent { color: var(--accent); }
 .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 16px; }
 .project-card { position: relative; display: flex; flex-direction: column; min-height: 520px; overflow: hidden; border-radius: 20px; background: var(--work-card); }
 .project-art { position: absolute; left: 0; top: 0; width: 100%; height: 56%; background: url("assets/contours-lime.svg") var(--pos, 50% 50%) / 300% auto no-repeat; transition: transform .6s ease; }
 .project-card:hover .project-art { transform: scale(1.05); }
 .project-top { position: relative; display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 14px; }
 .project-top span { padding: 4px 10px; border-radius: 999px; background: var(--work-bg); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
-.project-top span:first-child { font-size: 13px; font-weight: 800; letter-spacing: 0; }
+.project-top span:first-child { flex: none; white-space: nowrap; font-size: 13px; font-weight: 800; letter-spacing: 0; }
 .project-body { position: relative; margin-top: auto; display: flex; flex-direction: column; gap: 12px; padding: 18px; background: var(--work-card); }
 .tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .tags span { padding: 4px 9px; border: 1px solid rgba(231, 228, 218, .25); border-radius: 999px; font-size: 12px; }
@@ -348,7 +343,6 @@ main { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap:
 .skill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 14px; }
 .skill-card { display: flex; flex-direction: column; gap: 14px; padding: 24px; border-radius: 20px; background: var(--panel); }
 .skill-head { display: flex; align-items: center; gap: 12px; }
-.skill-head span { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; background: var(--accent); color: var(--on-accent); font-size: 15px; font-weight: 900; }
 .skill-head h3 { font-size: 22px; font-weight: 900; letter-spacing: -.02em; line-height: 1.15; }
 .skill-card > p { font-size: 16px; line-height: 1.55; color: var(--text2); }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -468,3 +462,10 @@ body.dialog-open { overflow: hidden; }
   .id-card { flex-basis: 100%; }
 }
 @media (max-width: 380px) { .dock a { width: 38px; height: 38px; } }
+
+/* ---------- 404 page ---------- */
+.notfound { min-height: 100svh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 24px; text-align: center; }
+.notfound-code { font-size: clamp(120px, 30vw, 260px); font-weight: 900; font-stretch: 125%; line-height: .8; letter-spacing: -.04em; color: var(--wordmark); }
+.notfound h1 { font-size: clamp(28px, 4vw, 44px); font-weight: 900; letter-spacing: -.03em; }
+.notfound p { color: var(--text2); }
+.notfound .btn-row { justify-content: center; margin-top: 8px; }

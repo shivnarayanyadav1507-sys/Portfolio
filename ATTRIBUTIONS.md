@@ -2,7 +2,6 @@
 - Archivo (main site font): The Archivo Project Authors, SIL Open Font License 1.1; assets/fonts/ARCHIVO-OFL.txt. Bundled locally from Fontsource.
 - Playfair Display Black Italic (the "Guy?" in the CV page heading): The Playfair Display Project Authors, SIL Open Font License 1.1; assets/fonts/PLAYFAIR-DISPLAY-OFL.txt. Bundled locally from Fontsource.
 - Instrument Serif (CV page headings): The Instrument Serif Project Authors, SIL Open Font License 1.1; assets/fonts/INSTRUMENT-SERIF-OFL.txt. Bundled locally from Fontsource.
-- Fredoka (used by profile.html): Google Fonts, SIL Open Font License; assets/fonts/OFL.txt.
 - Social icons: Simple Icons, CC0; assets/icons/LICENSE.txt. LinkedIn v11, other icons v14. Brand marks belong to their owners.
 - D3 array and geo: ISC licenses in vendor/.
 - Globe coastlines: Natural Earth, public domain.
@@ -11,4 +10,4 @@
 - Layout inspiration: heynesh.com (sidebar, wordmark hero, year-by-year journey) and an editorial CV page reference supplied by the user. Original design and code; nothing copied.
 - Magnetic dock behavior inspired by Componentry; implemented in plain JavaScript for GitHub Pages.
 - Solar system clock: original design for this portfolio. It reads the visitor's own device clock; nothing is sent anywhere.
-- Visitor stats: GoatCounter (goatcounter.com). No cookies; it records pages, referrers, browser type, screen size and approximate country and region, not who the visitor is.
+- Visitor badge: Abacus counting API (abacus.jasoncameron.dev). It stores only a running number; no cookies and no personal data. The visitor's own number is kept in their browser.

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shivyadav.work.gd/sitemap.xml

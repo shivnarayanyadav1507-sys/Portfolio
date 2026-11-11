@@ -98,5 +98,14 @@ if (stage && canvas) {
       }
     }
   }
-  Promise.all(Array.from({ length: 6 }, loader));
+  // The 45 frames are about 3 MB. Desktop pointers load them straight away; touch screens only
+  // after the first touch on the character, and data-saver mode never (the poster stays).
+  let started = false;
+  const startLoading = () => { if (!started) { started = true; Promise.all(Array.from({ length: 6 }, loader)); } };
+  const saveData = !!(navigator.connection && navigator.connection.saveData);
+  if (saveData) { /* keep the static poster */ }
+  else if (matchMedia('(hover: none)').matches) {
+    stage.addEventListener('pointerdown', startLoading, { once: true, passive: true });
+    stage.addEventListener('focus', startLoading, { once: true });
+  } else startLoading();
 }

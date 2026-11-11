@@ -25,7 +25,7 @@
   const resetBtn = document.getElementById('globe-reset');
   if (!list || !canvas) return;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  let selected = 5, lon = 80, lat = 18, zoom = 1, land = null, w = 0, h = 0, drag = null, raf = 0;
+  let selected = experiences.length - 1, lon = 80, lat = 18, zoom = 1, land = null, w = 0, h = 0, drag = null, raf = 0;
   const ctx = canvas.getContext('2d');
 
   /* ----- timeline ----- */
@@ -140,7 +140,7 @@
     lon += k[0] / zoom * 2; lat = Math.max(-75, Math.min(75, lat + k[1] / zoom * 2)); render();
   });
   resetBtn.addEventListener('click', () => {
-    select(5, false); fly(80, 18);
+    select(experiences.length - 1, false); fly(80, 18);
   });
   window.addEventListener('themechange', () => { col = colors(); render(); });
   window.addEventListener('resize', size);
