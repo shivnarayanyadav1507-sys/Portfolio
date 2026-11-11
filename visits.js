@@ -1,4 +1,4 @@
-/* "You are visitor no. N" badge, counted with Abacus (free, no account, no cookies).
+/* Visitor ticket ("No. 0002"), counted with Abacus (free, no account, no cookies).
    - A browser is counted once: its number is kept in localStorage and shown again on later visits.
    - Counting only happens on the live domain, so local testing never changes the total.
    - If storage is blocked or the counter can't be reached, the badge simply stays hidden. */
@@ -34,18 +34,19 @@
     .finally(() => clearTimeout(timer));
 
   function show(n, animate) {
-    const fmt = v => v.toLocaleString('en-GB');
-    const nums = badges.map(b => b.querySelector('[data-visitor-no]'));
+    // tickets read like a serial number: 0002, 0048, 1,235, 12,480
+    const fmt = (v, el) => (el.dataset.format === 'ticket' && v < 10000 ? String(v).padStart(4, '0') : v.toLocaleString('en-GB'));
+    const nums = badges.flatMap(b => [...b.querySelectorAll('[data-visitor-no]')]);
     badges.forEach(b => { b.hidden = false; });
     if (!animate || n < 10 || matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      nums.forEach(el => { el.textContent = fmt(n); });
+      nums.forEach(el => { el.textContent = fmt(n, el); });
       return;
     }
     const t0 = performance.now(), dur = 1200;
     (function step(t) {
       const p = Math.min(1, (t - t0) / dur);
       const v = Math.max(1, Math.round(n * (1 - Math.pow(1 - p, 3))));
-      nums.forEach(el => { el.textContent = fmt(v); });
+      nums.forEach(el => { el.textContent = fmt(v, el); });
       if (p < 1) requestAnimationFrame(step);
     })(t0);
   }

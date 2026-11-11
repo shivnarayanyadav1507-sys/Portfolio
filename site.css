@@ -212,13 +212,29 @@ main { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap:
 .hero-stage.is-ready .character-poster { opacity: 0; transition: opacity .35s ease; }
 .hero-right { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px; }
 .focus-card { flex: 1 1 200px; display: flex; flex-direction: column; gap: 10px; padding: 16px 18px; }
-/* ---------- visitor badge ---------- */
-.visitor-badge { display: inline-flex; align-items: center; gap: 7px; min-height: 36px; padding: 0 14px 0 12px; border-radius: 999px; background: var(--glass); border: 1px solid var(--glass-border); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); font-size: 13px; color: var(--muted); white-space: nowrap; }
-.visitor-badge[hidden] { display: none; }
-.visitor-badge b { font-weight: 900; font-size: 15px; color: var(--ink); font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
-.visitor-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent); }
+/* ---------- visitor ticket ---------- */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.ticket { --stub: 68px; --notch: 9px; position: relative; flex: none; display: flex; min-height: 96px; border-radius: 14px; overflow: hidden;
+  -webkit-mask: radial-gradient(circle var(--notch) at calc(100% - var(--stub)) 0, #0000 98%, #000) top / 100% 51% no-repeat, radial-gradient(circle var(--notch) at calc(100% - var(--stub)) 100%, #0000 98%, #000) bottom / 100% 51% no-repeat;
+  mask: radial-gradient(circle var(--notch) at calc(100% - var(--stub)) 0, #0000 98%, #000) top / 100% 51% no-repeat, radial-gradient(circle var(--notch) at calc(100% - var(--stub)) 100%, #0000 98%, #000) bottom / 100% 51% no-repeat; }
+.ticket[hidden] { display: none; }
+.ticket-main { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: space-between; gap: 6px; padding: 12px 14px; background: #161a14; color: #e7e4da; border-right: 2px dashed var(--bg); }
+.ticket-main small { font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: #cde64a; }
+.ticket-num { font-size: 34px; font-weight: 900; font-stretch: 112%; line-height: .9; letter-spacing: -.02em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ticket-num > span[aria-hidden] { margin-right: 2px; font-size: 14px; font-weight: 700; font-stretch: 100%; letter-spacing: .02em; opacity: .6; }
+.ticket-num b { font-weight: 900; }
+.ticket-bars { width: 110px; height: 10px; opacity: .45; background: repeating-linear-gradient(90deg, currentColor 0 2px, transparent 2px 4px, currentColor 4px 5px, transparent 5px 8px, currentColor 8px 11px, transparent 11px 13px); }
+.ticket-stub { flex: 0 0 var(--stub); display: grid; place-items: center; background: #cde64a; color: #161a14; }
+.ticket-stub b { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 18px; font-weight: 900; letter-spacing: .02em; }
+[data-theme="dark"] .ticket-main { background: #0c1712; box-shadow: inset 0 0 0 1px rgba(231, 237, 221, .08); }
+/* phone top bar: one-line ticket */
+.ticket-mini { --stub: 20px; --notch: 4px; min-height: 38px; border-radius: 9px; }
+.ticket-mini .ticket-main { flex-direction: row; align-items: center; justify-content: flex-start; gap: 8px; padding: 0 10px 0 12px; border-right-width: 1.5px; }
+.ticket-mini .ticket-main small { font-size: 11px; letter-spacing: .14em; }
+.ticket-mini .ticket-num { font-size: 20px; }
+.ticket-mini .ticket-stub { background-image: repeating-linear-gradient(0deg, transparent 0 3px, rgba(22, 26, 20, .35) 3px 4px); }
 .hero-tools { align-items: center; gap: 12px; }
-@media (max-width: 420px) { .visitor-badge { padding: 0 10px; gap: 5px; font-size: 12px; } .visitor-badge b { font-size: 14px; } }
+@media (max-width: 370px) { .ticket-mini .ticket-main small { display: none; } }
 /* ---------- solar system clock (hero) ---------- */
 .orbit-clock { --orb-ring: rgba(22, 26, 20, .16); --orb-star: rgba(22, 26, 20, .28); --orb-p1: #2c3520; --orb-p2: #6f8130; --orb-p3: #8fa62c;
   flex: 1 1 200px; min-width: 0; display: flex; flex-direction: column; padding: 10px 14px 14px; }
@@ -425,13 +441,18 @@ body.dialog-open { overflow: hidden; }
   .orbit-hm { font-size: 28px; }
   .focus-card ul { gap: 6px; }
   .focus-card li { font-size: 15px; }
-  .sidebar { gap: 10px; }
+  .sidebar { gap: 8px; }
   .side-intro { padding: 14px; gap: 10px; }
   .side-intro p { font-size: 14px; }
   .side-stats { padding: 12px 14px; }
   .side-nav { padding: 8px; }
-  .side-nav a { min-height: 40px; }
+  .side-nav a { min-height: 37px; }
   .side-cv { min-height: 48px; }
+  .ticket { min-height: 62px; }
+  .ticket-main { padding: 8px 12px; gap: 3px; }
+  .ticket-num { font-size: 26px; }
+  .ticket-bars { display: none; }
+  .ticket-stub b { font-size: 15px; }
 }
 
 /* ---------- tablet & phone: dock instead of sidebar ---------- */
