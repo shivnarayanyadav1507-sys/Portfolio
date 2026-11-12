@@ -5,7 +5,7 @@
 - Social icons: Simple Icons, CC0; assets/icons/LICENSE.txt. LinkedIn v11, ResearchGate v16, other icons v14. Brand marks belong to their owners.
 - D3 array and geo: ISC licenses in vendor/.
 - Globe coastlines: Natural Earth, public domain.
-- Character: supplied portfolio artwork and transparent character video (assets/character-stacked.mp4: picture on top, transparency mask below, played back on a canvas).
+- Character: supplied portfolio artwork and transparent character video (assets/character-stacked.mp4: picture on top, transparency mask below, played back on a canvas; assets/character-turn/ holds 32 head-turn frames taken from the same video).
 - User-supplied UI references: Uiverse profile card by narmesh_sah; sun and moon theme switch by Galahhad (MIT, via Uiverse.io); folder by junaid_3671; social row by Valeron-T. Adapted for this portfolio.
 - Layout and motion inspiration: heynesh.com (wordmark opening that folds into a sidebar, blurred portrait backdrop, year-by-year journey with a connecting line) and an editorial CV page reference supplied by the user. Original design and code; nothing copied.
 - Colour palette: Storm grey #5A6068, matte black #1C1D20, safety orange #FF5F00 (60 / 30 / 10), from a reference supplied by the user.

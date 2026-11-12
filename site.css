@@ -521,6 +521,9 @@ body { --dot: rgba(28, 29, 32, 0.28); }
 .char-stage canvas { opacity: 0; transition: opacity .4s ease; }
 .char-stage.is-ready canvas { opacity: 1; }
 .char-stage.is-ready .char-poster { opacity: 0; transition: opacity .4s ease .15s; }
+.char-stage canvas.char-turn { z-index: 2; opacity: 0; transition: opacity .18s ease; }
+.char-stage canvas.char-turn.is-on { opacity: 1; }
+.char-stage.is-turning canvas:not(.char-turn), .char-stage.is-turning .char-poster { opacity: 0; transition: opacity .1s ease .18s; }
 .char-glow { position: absolute; left: -12%; right: -12%; top: 6%; bottom: 14%; border-radius: 50%; background: radial-gradient(closest-side, rgba(255, 95, 0, .5), rgba(255, 95, 0, .16) 55%, rgba(255, 95, 0, 0)); filter: blur(22px); opacity: calc(1 - var(--intro, 0) * .7); }
 
 .intro-stage { position: fixed; inset: 0; z-index: 30; pointer-events: none; }

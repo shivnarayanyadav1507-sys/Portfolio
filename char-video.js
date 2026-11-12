@@ -39,7 +39,7 @@
   video.src = new URL('assets/character-stacked.mp4', document.baseURI).href;
 
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  let ready = false, wanted = true, raf = 0;
+  let ready = false, wanted = true, held = false, raf = 0;
 
   function draw() {
     if (video.readyState < 2) return;
@@ -56,7 +56,7 @@
     if (hasRVFC) video.requestVideoFrameCallback(loop); else raf = requestAnimationFrame(loop);
   }
   function play() {
-    if (reduced.matches || !wanted) return;
+    if (reduced.matches || !wanted || held) return;
     const p = video.play();
     if (p && p.then) p.then(loop).catch(() => { /* autoplay blocked (e.g. low power mode): keep the poster or last frame */ });
   }
@@ -66,12 +66,35 @@
   });
   reduced.addEventListener('change', () => { if (reduced.matches) video.pause(); else play(); });
 
-  /* intro.js pauses the clip once the character is fully blurred into the background */
+  /* intro.js pauses the clip once the character is fully blurred into the background.
+     char-turn.js holds it while the mouse turns his head, then hands it back at the matching frame. */
   window.charVideo = {
+    get active() { return wanted; },
     setActive(on) {
       if (on === wanted) return;
       wanted = on;
-      if (on) play(); else { video.pause(); cancelAnimationFrame(raf); }
+      if (on && !held) play(); else { video.pause(); cancelAnimationFrame(raf); }
+    },
+    /* source frame (0-239) on screen now; the file plays 240 frames forward, then back */
+    hold() {
+      held = true; video.pause(); cancelAnimationFrame(raf);
+      const f = Math.min(479, Math.floor(video.currentTime * 24));
+      return f < 240 ? f : 479 - f;
+    },
+    /* draws the matching frame, lets char-turn.js cross-fade to it, then plays on */
+    resume(k, done) {
+      if (video.readyState < 1) { held = false; if (done) done(); return; }
+      let fired = false;
+      const go = () => {
+        if (fired) return; fired = true;
+        draw(); if (done) done();
+        setTimeout(() => { held = false; play(); }, 460);
+      };
+      /* 'seeked' can fire while the decoder still shows the keyframe before the target,
+         so wait for the target frame itself where the browser can say when it is on screen */
+      if (hasRVFC) video.requestVideoFrameCallback(go);
+      video.addEventListener('seeked', () => setTimeout(go, hasRVFC ? 300 : 0), { once: true });
+      video.currentTime = (k + 0.5) / 24;
     }
   };
 })();
