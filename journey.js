@@ -57,7 +57,7 @@
   });
 
   /* years roll up like a counter when a card arrives */
-  const rollIn = card => card.querySelectorAll('.reel').forEach(r => { r.style.transform = `translateY(-${10 + Number(r.dataset.d)}em)`; });
+  const rollIn = card => card.querySelectorAll('.reel').forEach(r => { r.style.transform = `translateY(-${(10 + Number(r.dataset.d)) * 1.2}em)`; /* each digit cell is 1.2em tall so tops are not clipped */ });
   const revealIO = new IntersectionObserver(entries => entries.forEach(en => {
     if (!en.isIntersecting) return;
     en.target.classList.add('is-in'); rollIn(en.target); revealIO.unobserve(en.target);

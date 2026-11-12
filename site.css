@@ -327,7 +327,6 @@ main { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap:
 .river path { fill: none; stroke: var(--ink); stroke-opacity: .35; stroke-width: 1.5; }
 .timeline { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
 
-.tl-year { flex: none; width: 78px; font-size: 38px; font-weight: 900; font-stretch: 112%; letter-spacing: -.05em; line-height: 1; }
 
 .tl-when { font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #2c3027; }
 
@@ -453,7 +452,6 @@ body.dialog-open { overflow: hidden; }
   .dock { gap: 2px; padding: 5px; }
   .dock a { width: 42px; height: 42px; }
   
-  .tl-year { width: 64px; font-size: 30px; }
   .globe-col { position: static; }
   .id-card { flex-basis: 100%; }
 }
@@ -594,10 +592,10 @@ body { --dot: rgba(28, 29, 32, 0.28); }
 .tl-card.is-right { margin-left: auto; }
 .tl-card.is-in { opacity: 1; transform: none; filter: none; }
 .tl-card.is-active { border-color: rgba(255, 95, 0, .7); box-shadow: 0 0 0 1px rgba(255, 95, 0, .35), 0 18px 40px rgba(0, 0, 0, .18); }
-.tl-year { display: flex; align-items: flex-start; height: 1em; overflow: hidden; font-size: 52px; line-height: 1; font-weight: 900; font-stretch: 112%; letter-spacing: -.03em; color: var(--accent); margin-bottom: 10px; }
+.tl-year { display: flex; align-items: flex-start; height: 1.2em; overflow: hidden; padding-right: .14em; width: max-content; font-size: 52px; line-height: 1.2; font-weight: 900; font-stretch: 112%; letter-spacing: -.03em; color: var(--accent); margin-bottom: 4px; }
 .tl-year .reel { display: block; transform: translateY(0); transition: transform 1.25s cubic-bezier(.16, 1, .3, 1); }
 .tl-year .reel + .reel { transition-delay: .12s; }
-.tl-year .reel span { display: block; height: 1em; }
+.tl-year .reel span { display: block; height: 1.2em; padding-right: .04em; }
 .tl-card h3 { font-size: 20px; line-height: 1.2; font-weight: 800; letter-spacing: -.01em; }
 .tl-org { margin-top: 4px; font-size: 14px; font-weight: 600; color: var(--text2); }
 .tl-when { margin-top: 10px; font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
