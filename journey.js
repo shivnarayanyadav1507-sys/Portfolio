@@ -28,32 +28,103 @@
   let selected = experiences.length - 1, lon = 80, lat = 18, zoom = 1, land = null, w = 0, h = 0, drag = null, raf = 0;
   const ctx = canvas.getContext('2d');
 
-  /* ----- timeline ----- */
-  const short = y => '’' + y.slice(2);
+  /* ----- timeline: zig-zag cards, rolling years, a line that draws as you scroll ----- */
+  const tlCol = list.parentElement;
+  list.classList.add('tl-cards');
+  const reel = d => `<span class="reel" data-d="${d}">${'01234567890123456789'.split('').map(n => `<span>${n}</span>`).join('')}</span>`;
   list.innerHTML = experiences.map((e, i) => `
-    <li class="tl-item" data-i="${i}">
-      <button class="tl-btn" type="button" aria-expanded="false" aria-controls="tl-detail-${i}">
-        <span class="tl-year">${short(e.year)}</span>
-        <span class="tl-title"><b>${e.title}</b><span>${e.org === e.title ? e.place : e.org + ' · ' + e.place}</span></span>
-      </button>
-      <div class="tl-detail" id="tl-detail-${i}">
-        <span class="tl-when">${e.when}</span>
-        <p>${e.text}</p>
-        ${e.link ? `<button type="button" class="btn btn-sm" data-open-project="${e.link}">View related project</button>` : ''}
+    <li class="tl-card ${i % 2 ? 'is-left' : 'is-right'}" data-i="${i}">
+      <div class="tl-year"><span class="sr-only">${e.year}</span><span aria-hidden="true">’</span><span aria-hidden="true" style="display:flex">${reel(e.year[2])}${reel(e.year[3])}</span></div>
+      <h3>${e.title}</h3>
+      <p class="tl-org">${e.org === e.title ? e.place : e.org + ' · ' + e.place}</p>
+      <p class="tl-when">${e.when}</p>
+      <p class="tl-text">${e.text}</p>
+      <div class="tl-foot">
+        <button type="button" class="btn btn-outline btn-sm" data-show="${i}">Show on globe</button>
+        ${e.link ? `<button type="button" class="btn btn-ink btn-sm" data-open-project="${e.link}">View related project</button>` : ''}
       </div>
     </li>`).join('');
+  const cards = [...list.querySelectorAll('.tl-card')];
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('class', 'tl-line'); svg.setAttribute('aria-hidden', 'true');
+  tlCol.insertBefore(svg, list);
+
   list.addEventListener('click', ev => {
     const proj = ev.target.closest('[data-open-project]');
     if (proj) { if (window.openProject) window.openProject(proj.dataset.openProject); return; }
-    const btn = ev.target.closest('.tl-btn');
-    if (btn) select(Number(btn.parentElement.dataset.i), true);
+    const card = ev.target.closest('.tl-card');
+    if (card) { manual = performance.now(); select(Number(card.dataset.i), true); }
   });
+
+  /* years roll up like a counter when a card arrives */
+  const rollIn = card => card.querySelectorAll('.reel').forEach(r => { r.style.transform = `translateY(-${10 + Number(r.dataset.d)}em)`; });
+  const revealIO = new IntersectionObserver(entries => entries.forEach(en => {
+    if (!en.isIntersecting) return;
+    en.target.classList.add('is-in'); rollIn(en.target); revealIO.unobserve(en.target);
+  }), { threshold: 0.18 });
+  cards.forEach(c => revealIO.observe(c));
+  if (reduced.matches) cards.forEach(c => { c.classList.add('is-in'); c.querySelectorAll('.reel').forEach(r => { r.style.transition = 'none'; }); rollIn(c); });
+
+  /* the card crossing the middle of the screen is the active one; the globe follows it */
+  let manual = 0;
+  const activeIO = new IntersectionObserver(entries => entries.forEach(en => {
+    if (!en.isIntersecting || performance.now() - manual < 900) return;
+    const i = Number(en.target.dataset.i);
+    if (i !== selected) select(i, true);
+  }), { rootMargin: '-48% 0px -48% 0px' });
+  cards.forEach(c => activeIO.observe(c));
+
+  /* connector: a curve from each card to the next, with dots where it touches them */
+  let pathLen = 0, marks = [], path = null, dots = [];
+  function layoutLine() {
+    if (!cards.length) return;
+    const box = tlCol.getBoundingClientRect();
+    if (getComputedStyle(svg).display === 'none') return;
+    svg.setAttribute('viewBox', `0 0 ${box.width} ${box.height}`);
+    const pts = cards.map(c => { const r = c.getBoundingClientRect(); return { l: r.left - box.left, r: r.right - box.left, t: r.top - box.top, b: r.bottom - box.top, right: c.classList.contains('is-right') }; });
+    let d = '', anchors = [];
+    for (let i = 0; i < pts.length - 1; i++) {
+      /* like the reference: the line leaves a card on its outer side and sweeps diagonally behind
+         to the same side of the next card, alternating right and left */
+      const a = pts[i], n = pts[i + 1], dir = i % 2 ? -1 : 1;
+      const A = { x: dir > 0 ? a.r : a.l, y: a.b - 42 };
+      const B = { x: dir > 0 ? n.r : n.l, y: n.t + 42 };
+      const c1 = { x: A.x + dir * 70, y: A.y + 80 };
+      const c2 = { x: B.x + dir * 70, y: B.y - 80 };
+      d += `${i ? ' ' : ''}M${A.x.toFixed(1)} ${A.y.toFixed(1)} C${c1.x.toFixed(1)} ${c1.y.toFixed(1)} ${c2.x.toFixed(1)} ${c2.y.toFixed(1)} ${B.x.toFixed(1)} ${B.y.toFixed(1)}`;
+      anchors.push(A, B);
+    }
+    svg.innerHTML = `<path d="${d}"/>` + anchors.map(p => `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="4.5"/>`).join('');
+    path = svg.querySelector('path'); dots = [...svg.querySelectorAll('circle')];
+    pathLen = path.getTotalLength();
+    /* length along the path at each dot */
+    marks = []; let acc = 0;
+    const segs = d.split(' M');
+    segs.forEach((s, i) => {
+      const tmp = document.createElementNS('http://www.w3.org/2000/svg', 'path'); tmp.setAttribute('d', (i ? 'M' : '') + s); svg.appendChild(tmp);
+      const L = tmp.getTotalLength(); tmp.remove();
+      marks.push(acc, acc + L); acc += L;
+    });
+    path.style.strokeDasharray = `${pathLen} ${pathLen}`;
+    drawLine();
+  }
+  function drawLine() {
+    if (!path) return;
+    const r = tlCol.getBoundingClientRect(), vh = window.innerHeight;
+    const prog = reduced.matches ? 1 : Math.max(0, Math.min(1, (vh * 0.62 - r.top) / r.height));
+    const drawn = pathLen * prog;
+    path.style.strokeDashoffset = String(pathLen - drawn);
+    dots.forEach((c, i) => { c.style.opacity = drawn >= marks[i] - 1 ? '1' : '0'; });
+  }
+  let lineTick = false;
+  window.addEventListener('scroll', () => { if (!lineTick) { lineTick = true; requestAnimationFrame(() => { lineTick = false; drawLine(); }); } }, { passive: true });
+  window.addEventListener('resize', () => requestAnimationFrame(layoutLine));
+  if ('ResizeObserver' in window) new ResizeObserver(() => layoutLine()).observe(list);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(layoutLine);
+
   function select(i, move) {
     selected = i;
-    list.querySelectorAll('.tl-item').forEach((li, j) => {
-      li.classList.toggle('is-open', i === j);
-      li.querySelector('.tl-btn').setAttribute('aria-expanded', String(i === j));
-    });
+    cards.forEach((c, j) => c.classList.toggle('is-active', i === j));
     canvas.setAttribute('aria-label', `Globe of experience locations; selected: ${experiences[i].place}. Drag to rotate; arrow keys rotate.`);
     if (move) fly(experiences[i].lon, experiences[i].lat); else render();
   }

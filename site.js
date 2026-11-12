@@ -10,7 +10,7 @@
   function paintToggles() {
     const dark = root.dataset.theme === 'dark';
     toggles.forEach(input => { input.checked = dark; });
-    if (meta) meta.content = dark ? '#12221b' : '#d8d5ca';
+    if (meta) meta.content = dark ? '#1c1d20' : '#5a6068';
     window.dispatchEvent(new Event('themechange'));
   }
   toggles.forEach(input => input.addEventListener('change', () => {
@@ -19,11 +19,6 @@
     try { localStorage.setItem('portfolio-theme', next); } catch (e) { /* storage blocked */ }
     paintToggles();
   }));
-  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-    let saved = null;
-    try { saved = localStorage.getItem('portfolio-theme'); } catch (err) { /* ignore */ }
-    if (!saved) { root.dataset.theme = e.matches ? 'dark' : 'light'; paintToggles(); }
-  });
   paintToggles();
 
   /* ---------- active section in sidebar and dock ---------- */

@@ -2,12 +2,13 @@
 - Archivo (main site font): The Archivo Project Authors, SIL Open Font License 1.1; assets/fonts/ARCHIVO-OFL.txt. Bundled locally from Fontsource.
 - Playfair Display Black Italic (the "Guy?" in the CV page heading): The Playfair Display Project Authors, SIL Open Font License 1.1; assets/fonts/PLAYFAIR-DISPLAY-OFL.txt. Bundled locally from Fontsource.
 - Instrument Serif (CV page headings): The Instrument Serif Project Authors, SIL Open Font License 1.1; assets/fonts/INSTRUMENT-SERIF-OFL.txt. Bundled locally from Fontsource.
-- Social icons: Simple Icons, CC0; assets/icons/LICENSE.txt. LinkedIn v11, other icons v14. Brand marks belong to their owners.
+- Social icons: Simple Icons, CC0; assets/icons/LICENSE.txt. LinkedIn v11, ResearchGate v16, other icons v14. Brand marks belong to their owners.
 - D3 array and geo: ISC licenses in vendor/.
 - Globe coastlines: Natural Earth, public domain.
-- Character: supplied portfolio artwork and video frames.
+- Character: supplied portfolio artwork and transparent character video (assets/character-stacked.mp4: picture on top, transparency mask below, played back on a canvas).
 - User-supplied UI references: Uiverse profile card by narmesh_sah; sun and moon theme switch by Galahhad (MIT, via Uiverse.io); folder by junaid_3671; social row by Valeron-T. Adapted for this portfolio.
-- Layout inspiration: heynesh.com (sidebar, wordmark hero, year-by-year journey) and an editorial CV page reference supplied by the user. Original design and code; nothing copied.
+- Layout and motion inspiration: heynesh.com (wordmark opening that folds into a sidebar, blurred portrait backdrop, year-by-year journey with a connecting line) and an editorial CV page reference supplied by the user. Original design and code; nothing copied.
+- Colour palette: Storm grey #5A6068, matte black #1C1D20, safety orange #FF5F00 (60 / 30 / 10), from a reference supplied by the user.
 - Magnetic dock behavior inspired by Componentry; implemented in plain JavaScript for GitHub Pages.
 - Solar system clock: original design for this portfolio. It reads the visitor's own device clock; nothing is sent anywhere.
 - Visitor badge: Abacus counting API (abacus.jasoncameron.dev). It stores only a running number; no cookies and no personal data. The visitor's own number is kept in their browser.

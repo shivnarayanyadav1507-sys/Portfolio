@@ -6,7 +6,8 @@ window.PORTFOLIO_CONFIG = {
     x: 'https://x.com/stillsbyshiv',
     instagram: 'https://www.instagram.com/stillsbyshiv/',
     discord: 'stillsbyshiv',
-    github: 'https://github.com/shivnarayanyadav1507-sys'
+    github: 'https://github.com/shivnarayanyadav1507-sys',
+    researchgate: 'https://www.researchgate.net/profile/Shiv-Yadav-10?ev=hdr_xprf'
   },
   cv: 'cv.html', // The CV page; its Download button serves assets/CV_Shiv_Narayan_Yadav.pdf
   // "You are visitor no." badge (Abacus counter, no account needed).
